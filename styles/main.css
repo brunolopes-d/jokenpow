@@ -11,7 +11,8 @@ main {
     background-color: black;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -31,4 +32,26 @@ button {
 button:active {
     transform: translateY(3px);  
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.sprites {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.sprite {
+    width: 32px;   
+    height: 32px;  
+    background-image: url('/assets/images/Untitled-1.gif'); 
+    background-repeat: no-repeat; 
+    animation: play 1s steps(4) infinite; 
+    transform: scale(7);
+    image-rendering: pixelated;
+}
+
+
+@keyframes play {
+    from { background-position: 0 0; }     
+    to { background-position: -128px 0; }    
 }
