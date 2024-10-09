@@ -7,11 +7,9 @@
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-    <main>
+    <div class="telainicial">
         <img src="" alt="Jokenpow">
-        <button>
-            Jogar
-        </button>
+        <button class="button"> Jogar </button>
         <div class="sprites">
             <div class="sprite"></div>
             <div class="sprite"></div>
@@ -28,6 +26,43 @@
             <div class="sprite"></div>
             
         </div>
-    </main>
+    </div>
+
+    <div class="selecaopersonagens">
+        <div class="leftside screen">
+            <div class="player-label">
+                Jogador 1
+            </div>
+            <div class="character-left">
+                <div class="characterselected">
+                    <img src="" alt="">
+                    <div class="habilities"></div>
+                </div>
+                <div class="characterstochoose">
+                    <div class="square"> D </div>
+                    <div class="square"> E </div>
+                    <div class="square"> F </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightside screen">
+            <div class="player-label">
+                Jogador 2
+            </div>
+            <div class="character-right">
+                <div class="characterstochoose">
+                    <div class="square">A</div>
+                    <div class="square">B</div>
+                    <div class="square">C</div>
+                </div>
+                <div class="characterselected">
+                    <div></div>
+                    <img src="" alt="">
+                    <div class="habilities"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="js/main.js"></script>
 </html>
