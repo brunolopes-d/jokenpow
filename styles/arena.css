@@ -12,7 +12,7 @@ body{
     background-color: black;
 }
 
-.arena{
+.arena {
     display: flex;
     position: absolute;
     justify-content: space-around;
@@ -22,14 +22,14 @@ body{
     top: 200px;
 }
 
-.left-platform, .right-platform{
+.left-platform, .right-platform {
     position: relative;
     width: 200px;
     height: 20px;
     background-color: red;
 }
 
-.arena-ground{
+.arena-ground {
     display: block;
     height: 10%;
     background-color: red;

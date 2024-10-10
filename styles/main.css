@@ -151,3 +151,19 @@ button:active {
     from { background-position: 0 0; }     
     to { background-position: -128px 0; }    
 }
+
+@keyframes escurecer {
+    0% {
+      filter: brightness(100%);  /* Cor normal */
+    }
+    50% {
+      filter: brightness(70%);   /* Escurecer um pouco */
+    }
+    100% {
+      filter: brightness(100%);  /* Voltar ao normal */
+    }
+  }
+
+  .escurecendo {
+    animation: escurecer 1.5s infinite;
+}
