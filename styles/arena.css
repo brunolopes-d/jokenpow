@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+}
+
+.arena{
+    display: flex;
+    position: absolute;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+    top: 200px;
+}
+
+.left-platform, .right-platform{
+    position: relative;
+    width: 200px;
+    height: 20px;
+    background-color: red;
+}
+
+.arena-ground{
+    display: block;
+    height: 10%;
+    background-color: red;
+}
