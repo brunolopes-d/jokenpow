@@ -131,6 +131,10 @@ button:active {
     margin-bottom: 10px;
 }
 
+.square:hover{
+    cursor: pointer;
+}
+
 .rightside {
     border-left: 2px solid #920303;
 }
