@@ -1,8 +1,11 @@
-const button = document.querySelector(".button")
+const startButton = document.querySelector(".start-button")
 const telaInicial = document.querySelector(".telainicial")
 const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
 
-button.addEventListener('click', () => {
+// Mudar para tela de seleção de personagem, quando 
+// o startButton for clicado
+
+startButton.addEventListener('click', () => {
     telaInicial.classList.add('hidden')
     telaSelecaoPersonagem.classList.remove('hidden')
 })
