@@ -16,6 +16,13 @@ html, body {
     align-items: center;
 }
 
+.telainicial img {
+    position: relative;
+    top: 100px;
+    width: 400px;
+    height: 200px;
+}
+
 /* Botão com animação de quando aperta ele afunda */
 button {
     padding: 15px 35px;
