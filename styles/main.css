@@ -24,7 +24,7 @@ html, body {
 }
 
 /* Botão com animação de quando aperta ele afunda */
-button {
+button.start-button {
     padding: 15px 35px;
     font-family: "Pixelify Sans";
     font-size: 1.7em;
@@ -37,7 +37,7 @@ button {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-button:active {
+button.start-button:active {
     transform: translateY(3px);  
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
@@ -133,6 +133,43 @@ button:active {
 
 .square:hover{
     cursor: pointer;
+}
+
+.button-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40vh;
+    align-items: center;
+    
+}
+
+.right-confirm-character{
+    width: 200px;
+    height: 63px;
+    padding: 15px 35px;
+    font-family: "Pixelify Sans";
+    font-size: 1.7em;
+    color: white;
+    background-color: #d00000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.left-confirm-character{
+    width: 200px;
+    height: 63px;
+    padding: 15px 35px;
+    font-family: "Pixelify Sans";
+    font-size: 1.7em;
+    color: white;
+    background-color: #d00000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .rightside {

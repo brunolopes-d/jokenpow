@@ -1,3 +1,4 @@
+
 const botaoIniciar = document.querySelector(".start-button")
 const telaInicial = document.querySelector(".telainicial")
 const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
@@ -8,7 +9,8 @@ const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
 botaoIniciar.addEventListener('click', () => {
     telaInicial.classList.add('hidden')
     telaSelecaoPersonagem.classList.remove('hidden')
-    
+    // Renderizar a nova tela com personagem do indice inicial (pedra)
+    render(estado)
 })
 
 // Criação de um estado inicial para a aplicação, a cada interação
@@ -60,9 +62,19 @@ const teclasApertadas = (evento, estado) => {
 
 document.addEventListener('keydown', (e) => {
     // Cada vez que uma tecla é afundada, isso é, "keydown", 
-    // essa função é acionada, acionando então a teclasApertadas
+    // essa função é acionada primeiro ela verifica se a tecla apertada
+    // foi space-bar ou enter, que estão relacionadas à lógica
+    // de confirmação de personagens, se não for, 
+    // ela passa pelos ifs, acionando então a teclasApertadas
     // que por sua vez altera o estado da aplicação
     // No final, render fica responsável por colocar na tela o personagem
+
+    if(e.key === ' ') {
+        confirmaPlayer1()
+    }else if(e.key === 'Enter'){
+        confirmaPlayer2()
+    }
+
     estado = teclasApertadas(e, estado)
     console.log(estado.jogador1.indiceAtual)
     console.log(estado.jogador2.indiceAtual)
@@ -143,4 +155,32 @@ const render = (estado) => {
             if (quadradoPapelP2c) quadradoPapelP2c.classList.remove('escurecendo')
             break
     }
+}
+
+
+// Início de lógica para confirmação de personagens
+const botaoConfirmaP1 = document.querySelector('.left-confirm-character')
+const botaoConfirmaP2 = document.querySelector('.right-confirm-character')
+
+const confirmaPlayer1 =  () => {
+    // Muda o texto do botão
+    botaoConfirmaP1.innerText === 'Pronto' ? botaoConfirmaP1.innerText = 'Cancelar' : botaoConfirmaP1.innerText = 'Pronto'
+    verificaSeJogadoresEstaoProntos()
+}
+
+const confirmaPlayer2 = () => {
+    // Muda o texto do botão
+    botaoConfirmaP2.innerText === 'Pronto' ? botaoConfirmaP2.innerText = 'Cancelar' : botaoConfirmaP2.innerText = 'Pronto'
+    verificaSeJogadoresEstaoProntos()
+}
+
+const verificaSeJogadoresEstaoProntos = () => {
+    const botaoConfirmaP1 = document.querySelector('.left-confirm-character')
+    const botaoConfirmaP2 = document.querySelector('.right-confirm-character')
+
+    if(botaoConfirmaP1.innerText === 'Cancelar' && botaoConfirmaP2.innerText === 'Cancelar') renderizarArena()
+}
+
+const renderizarArena = () => {
+    console.log('oi')
 }
