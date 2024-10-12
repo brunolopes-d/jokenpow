@@ -86,76 +86,97 @@ const render = (estado) => {
     const espacoPersonagem2 = document.querySelector(".personagem2")
     const personagemJogador1 = estado.jogador1.personagens[estado.jogador1.indiceAtual]
     const personagemJogador2 = estado.jogador2.personagens[estado.jogador2.indiceAtual]
+    const quadradoPedra = document.querySelector(".pedra")
+    const quadradoPapel = document.querySelector(".papel")
+    const quadradoTesoura = document.querySelector(".tesoura")
 
     // Para o Jogador 1
     switch(personagemJogador1) {
         case "Pedra":
             espacoPersonagem1.src = `./assets/images/personagens/Pedra.png`
-            const quadradoPedraP1 = document.querySelector(".pedraP1")
-            const quadradoPapelP1 = document.querySelector(".papelP1")
-            const quadradoTesouraP1 = document.querySelector(".tesouraP1")
-
-            if (quadradoPedraP1) quadradoPedraP1.classList.add('escurecendo')
-            if (quadradoTesouraP1) quadradoTesouraP1.classList.remove("escurecendo")
-            if (quadradoPapelP1) quadradoPapelP1.classList.remove('escurecendo')
+            if (quadradoPedra) quadradoPedra.classList.add('escurecendo')
+            if (quadradoPapel) quadradoPapel.classList.remove("escurecendo")
+            if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendo')
             break
 
         case "Papel": 
             espacoPersonagem1.src = `./assets/images/personagens/Papel.png`
-            const quadradoPapelP1b = document.querySelector(".papelP1")
-            const quadradoPedraP1b = document.querySelector(".pedraP1")
-            const quadradoTesouraP1b = document.querySelector(".tesouraP1")
 
-            if (quadradoPapelP1b) quadradoPapelP1b.classList.add('escurecendo')
-            if (quadradoPedraP1b) quadradoPedraP1b.classList.remove('escurecendo')
-            if (quadradoTesouraP1b) quadradoTesouraP1b.classList.remove('escurecendo')
+            if (quadradoPapel) quadradoPapel.classList.add('escurecendo')
+            if (quadradoPedra) quadradoPedra.classList.remove('escurecendo')
+            if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendo')
             break
 
         case "Tesoura": 
             espacoPersonagem1.src = `./assets/images/personagens/Tesoura.png`
-            const quadradoTesouraP1c = document.querySelector(".tesouraP1")
-            const quadradoPedraP1c = document.querySelector(".pedraP1")
-            const quadradoPapelP1c = document.querySelector(".papelP1")
 
-            if (quadradoTesouraP1c) quadradoTesouraP1c.classList.add('escurecendo')
-            if (quadradoPedraP1c) quadradoPedraP1c.classList.remove('escurecendo')
-            if (quadradoPapelP1c) quadradoPapelP1c.classList.remove('escurecendo')
+            if (quadradoTesoura) quadradoTesoura.classList.add('escurecendo')
+            if (quadradoPedra) quadradoPedra.classList.remove('escurecendo')
+            if (quadradoPapel) quadradoPapel.classList.remove('escurecendo')
             break
     }
 
+    // Para o Jogador 2
     switch(personagemJogador2) {
         case "Pedra":
             espacoPersonagem2.src = `./assets/images/personagens/Pedra.png`
-            const quadradoPedraP2 = document.querySelector(".pedraP2")
-            const quadradoTesouraP2 = document.querySelector(".tesouraP2")
-            const quadradoPapelP2 = document.querySelector(".papelP2")
 
-            if (quadradoPedraP2) quadradoPedraP2.classList.add('escurecendo')
-            if (quadradoTesouraP2) quadradoTesouraP2.classList.remove("escurecendo")
-            if (quadradoPapelP2) quadradoPapelP2.classList.remove('escurecendo')
+            if (quadradoPedra) quadradoPedra.classList.add('p2select')
+            if (quadradoTesoura) quadradoTesoura.classList.remove("p2select")
+            if (quadradoPapel) quadradoPapel.classList.remove('p2select')
+
+            if (quadradoPedra) quadradoPedra.classList.add('escurecendoP2')
+            if (quadradoTesoura) quadradoTesoura.classList.remove("escurecendoP2")
+            if (quadradoPapel) quadradoPapel.classList.remove('escurecendoP2')
             break
         case "Papel": 
             espacoPersonagem2.src = `./assets/images/personagens/Papel.png`
-            const quadradoPapelP2b = document.querySelector(".papelP2")
-            const quadradoPedraP2b = document.querySelector(".pedraP2")
-            const quadradoTesouraP2b = document.querySelector(".tesouraP2")
 
-            if (quadradoPapelP2b) quadradoPapelP2b.classList.add('escurecendo')
-            if (quadradoPedraP2b) quadradoPedraP2b.classList.remove('escurecendo')
-            if (quadradoTesouraP2b) quadradoTesouraP2b.classList.remove('escurecendo')
+            if (quadradoPapel) quadradoPapel.classList.add('p2select')
+            if (quadradoPedra) quadradoPedra.classList.remove('p2select')
+            if (quadradoTesoura) quadradoTesoura.classList.remove('p2select')
+
+            if (quadradoPapel) quadradoPapel.classList.add('escurecendoP2')
+            if (quadradoPedra) quadradoPedra.classList.remove('escurecendoP2')
+            if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendoP2')
             break
         case "Tesoura": 
             espacoPersonagem2.src = `./assets/images/personagens/Tesoura.png`
-            const quadradoTesouraP2c = document.querySelector(".tesouraP2")
-            const quadradoPedraP2c = document.querySelector(".pedraP2")
-            const quadradoPapelP2c = document.querySelector(".papelP2")
 
-            if (quadradoTesouraP2c) quadradoTesouraP2c.classList.add('escurecendo')
-            if (quadradoPedraP2c) quadradoPedraP2c.classList.remove('escurecendo')
-            if (quadradoPapelP2c) quadradoPapelP2c.classList.remove('escurecendo')
+            if (quadradoTesoura) quadradoTesoura.classList.add('p2select')
+            if (quadradoPedra) quadradoPedra.classList.remove('p2select')
+            if (quadradoPapel) quadradoPapel.classList.remove('p2select')
+
+            if (quadradoTesoura) quadradoTesoura.classList.add('escurecendoP2')
+            if (quadradoPedra) quadradoPedra.classList.remove('escurecendoP2')
+            if (quadradoPapel) quadradoPapel.classList.remove('escurecendoP2') 
             break
     }
+
+    // Checa se os dois jogadores estão no mesmo personagem, se estiverem no mesmo
+    // personagem, ele troca a cor do quadrado pra roxo (azul + vermelho)
+
+    if (estado.jogador1.indiceAtual === estado.jogador2.indiceAtual) {
+        if (personagemJogador1 === "Pedra") {
+            quadradoPedra.classList.add('escurecendoBoth')
+            quadradoPedra.classList.remove('escurecendo')
+            quadradoPedra.classList.remove('p2select')
+        } else if (personagemJogador1 === "Papel") {
+            quadradoPapel.classList.add('escurecendoBoth')
+            quadradoPapel.classList.remove('escurecendo')
+            quadradoPapel.classList.remove('p2select')
+        } else if (personagemJogador1 === "Tesoura") {
+            quadradoTesoura.classList.add('escurecendoBoth')
+            quadradoTesoura.classList.remove('escurecendo')
+            quadradoTesoura.classList.remove('p2select')
+        }
+    } else {
+        quadradoPedra.classList.remove('escurecendoBoth')
+        quadradoPapel.classList.remove('escurecendoBoth')
+        quadradoTesoura.classList.remove('escurecendoBoth')
+    }
 }
+
 
 
 // Início de lógica para confirmação de personagens

@@ -193,7 +193,7 @@ button.start-button:active {
     font-family: "Pixelify Sans";
     font-size: 1.7em;
     color: white;
-    background-color: #d00000;
+    background-color: rgb(37, 95, 255);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -233,4 +233,19 @@ button.start-button:active {
 
   .escurecendo {
     animation: escurecer 1.5s infinite;
+}
+
+  .escurecendoP2 {
+    animation: escurecer 1.5s infinite;
+}
+
+.escurecendoBoth {
+    background-color: rgb(112, 0, 163);
+    border: 0.3em solid rgb(59, 0, 87);
+    animation: escurecer 1.5s infinite;
+}
+
+.p2select {
+    background-color: #023e8a;
+    border: 0.3em solid rgb(0, 21, 80)
 }
