@@ -182,5 +182,7 @@ const verificaSeJogadoresEstaoProntos = () => {
 }
 
 const renderizarArena = () => {
-    console.log('oi')
+    // Redireciona para a página arena.html
+    window.location.href = 'arena.html';
 }
+
