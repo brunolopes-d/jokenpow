@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/arena.css">
-    <title></title>
+    <title>Arena de Batalha</title>
 </head>
 <body> 
+    <!-- Barras de vida -->
+    <section class="health-bars">
+        <div class="health-bar player1-bar">
+            <div class="health player1-health"></div>
+        </div>
+
+        <div class="health-bar player2-bar">
+            <div class="health player2-health"></div>
+        </div>
+    </section>
+
     <section class="arena">
         <section class="left-platform"></section>
-
         <section class="right-platform"></section>
     </section>
     <section class="arena-ground"></section>
+
+    <script src="js/jogo.js"></script>
 </body>
 </html>
