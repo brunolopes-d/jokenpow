@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rozha+One&display=swap');
 
 html, body {
     margin: 0;
@@ -69,7 +70,8 @@ button.start-button:active {
 
 .selecaopersonagens {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    grid-template-columns: 40% 20% 40%;
     height: 100vh;
 }
 
@@ -84,6 +86,55 @@ button.start-button:active {
     background-color: black;
     opacity: 1;
     transition: opacity 0.5s ease;
+}
+
+.middle {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 100vh; 
+}
+
+.choosecharacter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding-top: 5px;
+}
+
+.selecionar-personagens-label {
+    text-align: center;
+    color: #d00000;
+    background-color: black;
+    padding: 5px;
+    font-size: 3em;
+    font-family: "Pixelify Sans";
+}
+
+.square {
+    font-family: "Pixelify Sans";
+    color: white;
+    background-color:#d00000;
+    padding: 50px;
+    border-radius: 5%;
+    border: 0.2em solid rgb(138, 4, 4);
+    margin-bottom: 10px;
+}
+
+.square:hover{
+    cursor: pointer;
+}
+
+.leftside, .rightside {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
 }
 
 .character-left {
@@ -101,8 +152,9 @@ button.start-button:active {
 }
 
 .player-label {
-    width: 100%;
-    background-color: #d00000;
+    text-align: center;
+    width: 70%;
+    border: 0.1em solid rgb(255, 255, 255);;
     color: white;
     font-family: "Pixelify Sans";
     font-size: 2.3em;
@@ -110,29 +162,19 @@ button.start-button:active {
     text-align: center;
 }
 
+
+.p1 {
+    background-color: #d00000;
+}
+
+.p2 {
+    background-color: rgb(37, 95, 255);
+}
+
+
 .characterselected {
     text-align: center;
     padding: 10px;
-}
-
-.characterstochoose {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.square {
-    background-color:#d00000;
-    padding: 20px;
-    border-radius: 5%;
-    border: 0.2em solid rgb(138, 4, 4);
-    margin-bottom: 10px;
-}
-
-.square:hover{
-    cursor: pointer;
 }
 
 .button-wrapper{
@@ -170,18 +212,6 @@ button.start-button:active {
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.rightside {
-    border-left: 2px solid #920303;
-}
-
-.leftside, .rightside {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
 }
 
 @keyframes play {
