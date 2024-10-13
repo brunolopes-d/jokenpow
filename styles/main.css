@@ -136,20 +136,6 @@ button.start-button:active {
     height: 100%;
 }
 
-.character-left {
-    display: grid;
-    grid-template-columns: 80% 20%;
-    width: 100%;
-    height: 100%;
-}
-
-.character-right {
-    display: grid;
-    grid-template-columns: 20% 80%;
-    width: 100%;
-    height: 100%;
-}
-
 .player-label {
     text-align: center;
     width: 70%;
@@ -170,10 +156,46 @@ button.start-button:active {
     background-color: rgb(37, 95, 255);
 }
 
+.character {
+    width: 100%;
+    height: 75%;
+}
 
 .characterselected {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
     padding: 10px;
+}
+
+.habilitiesP1 {
+    margin-top: 30px;
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.habilitiesP2 {
+    margin-top: 30px;
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.habilitiesP1 > .hab {
+    background-color: rgb(121, 0, 0);
+    padding: 45px;
+    border-radius: 50%;
+}
+
+.habilitiesP2 > .hab {
+    background-color: rgb(0, 11, 107);
+    padding: 45px;
+    border-radius: 50%;
 }
 
 .button-wrapper{
