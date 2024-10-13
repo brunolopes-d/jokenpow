@@ -79,16 +79,16 @@ body {
     position: absolute;
     width: 7rem;
     height: 7rem;
-    left: 43rem;
-    top: 63.6rem;
+    left: 10rem;
+    top: 40rem;
 }
 
 .personagemP2{
     position: absolute;
     width: 7rem;
     height: 7rem;
-    right: 43rem;
-    top: 63.6rem;
+    right: 10rem;
+    top: 40rem;
 }
 
 .arena-ground {
