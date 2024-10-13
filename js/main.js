@@ -185,6 +185,7 @@ const botaoConfirmaP2 = document.querySelector('.right-confirm-character')
 const confirmaPlayer1 =  () => {
     // Muda o texto do botão
     botaoConfirmaP1.innerText === 'Pronto' ? botaoConfirmaP1.innerText = 'Cancelar' : botaoConfirmaP1.innerText = 'Pronto'
+    
     verificaSeJogadoresEstaoProntos()
 }
 
@@ -203,6 +204,9 @@ const verificaSeJogadoresEstaoProntos = () => {
 
 const renderizarArena = () => {
     // Redireciona para a página arena.html, com os personagens escolhidos no formato de query params.
+    const personagemJogador1 = estado.jogador1.personagens[estado.jogador1.indiceAtual]
+    const personagemJogador2 = estado.jogador2.personagens[estado.jogador2.indiceAtual]
+        
     window.location.href = `arena.html?personagem1=${personagemJogador1}&personagem2=${personagemJogador2}`;
 }
 
