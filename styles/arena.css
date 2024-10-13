@@ -4,12 +4,17 @@
     box-sizing: border-box;
 }
 
+html{
+    font-size: 10px;
+}
+
 body {
     display: flex;
     flex-direction: column-reverse;
     height: 100vh;
     width: 100vw;
     background-color: black;
+    overflow: hidden;
 }
 
 /* Barra de vida dos jogadores */
@@ -17,14 +22,14 @@ body {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 20px;
+    top: -15rem;
     width: 100%;
     padding: 0 20px;
 }
 
 .health-bar {
-    width: 200px;
-    height: 20px;
+    width: 20rem;
+    height: 2rem;
     background-color: grey;
     border: 2px solid white;
 }
@@ -43,14 +48,30 @@ body {
     align-items: center;
     height: 90%;
     width: 100%;
-    top: 200px;
+    top: 20rem;
 }
 
 .left-platform, .right-platform {
     position: relative;
-    width: 200px;
-    height: 20px;
+    width: 20rem;
+    height: 2rem;
     background-color: red;
+}
+
+.personagemP1{
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    left: 43rem;
+    top: 63.6rem;
+}
+
+.personagemP2{
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    right: 43rem;
+    top: 63.6rem;
 }
 
 .arena-ground {

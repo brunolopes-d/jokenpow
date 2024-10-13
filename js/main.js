@@ -1,4 +1,3 @@
-
 const botaoIniciar = document.querySelector(".start-button")
 const telaInicial = document.querySelector(".telainicial")
 const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
@@ -204,6 +203,10 @@ const verificaSeJogadoresEstaoProntos = () => {
 
 const renderizarArena = () => {
     // Redireciona para a página arena.html
-    window.location.href = 'arena.html';
+    const personagemJogador1 = estado.jogador1.personagens[estado.jogador1.indiceAtual]
+    const personagemJogador2 = estado.jogador2.personagens[estado.jogador2.indiceAtual]
+    
+    window.location.href = `arena.html?personagem1=${personagemJogador1}&personagem2=${personagemJogador2}`;
+
 }
 
