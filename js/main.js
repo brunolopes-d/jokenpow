@@ -202,11 +202,7 @@ const verificaSeJogadoresEstaoProntos = () => {
 }
 
 const renderizarArena = () => {
-    // Redireciona para a página arena.html
-    const personagemJogador1 = estado.jogador1.personagens[estado.jogador1.indiceAtual]
-    const personagemJogador2 = estado.jogador2.personagens[estado.jogador2.indiceAtual]
-    
+    // Redireciona para a página arena.html, com os personagens escolhidos no formato de query params.
     window.location.href = `arena.html?personagem1=${personagemJogador1}&personagem2=${personagemJogador2}`;
-
 }
 
