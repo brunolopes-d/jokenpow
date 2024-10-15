@@ -1,6 +1,7 @@
 const botaoIniciar = document.querySelector(".start-button")
 const telaInicial = document.querySelector(".telainicial")
 const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
+const audio = document.querySelector("#audio")
 
 // Mudar para tela de seleção de personagem, quando 
 // o botaoIniciar for clicado
@@ -12,23 +13,32 @@ botaoIniciar.addEventListener('click', () => {
     render(estado)
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = new Audio("/assets/music/Under Fire.mp3")
+    audio.play()
+    audio.loop = true;
+})
+
 // Criação de um estado inicial para a aplicação, a cada interação
 // com a tela de seleção de personagens, um novo estado é criado, 
 // e é então renderizado na tela
 
-let estado = {
+const estadoInicial = () => ({
     jogador1: {
         nome: "Jogador 1",
         personagens: ["Pedra", "Papel", "Tesoura"],
         indiceAtual: 0
     },
-
     jogador2: {
         nome: "Jogador 2",
         personagens: ["Pedra", "Papel", "Tesoura"],
         indiceAtual: 0
     }
-}
+});
+
+
+// O estado é mutável
+let estado = estadoInicial();
 
 // Função responsável por criar um novo estado, com a nova posição
 // dentro do range de possibilidades, ou pedra, ou papel, ou tesoura
@@ -45,17 +55,17 @@ const selecionarPersonagem = (jogador, direcao) => {
 }
 
 const teclasApertadas = (evento, estado) => {
-    switch(evento.key) {
-        case "w": 
-        return {...estado, jogador1: selecionarPersonagem(estado.jogador1, -1)}
+    switch (evento.key) {
+        case "w":
+            return { ...estado, jogador1: selecionarPersonagem(estado.jogador1, -1) };
         case "s":
-        return {...estado, jogador1: selecionarPersonagem(estado.jogador1, 1)}
-        case "ArrowUp": 
-        return {...estado, jogador2: selecionarPersonagem(estado.jogador2, -1)}
+            return { ...estado, jogador1: selecionarPersonagem(estado.jogador1, 1) };
+        case "ArrowUp":
+            return { ...estado, jogador2: selecionarPersonagem(estado.jogador2, -1) };
         case "ArrowDown":
-        return {...estado, jogador2: selecionarPersonagem(estado.jogador2, 1)}
-        default: 
-        return estado
+            return { ...estado, jogador2: selecionarPersonagem(estado.jogador2, 1) };
+        default:
+            return estado; // Retorna o estado original caso nenhuma tecla relevante seja pressionada
     }
 }
 
