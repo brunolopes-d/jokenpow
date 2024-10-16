@@ -73,7 +73,7 @@ document.addEventListener('keydown', (e) => {
     }else if(e.key === 'Enter'){
         confirmaPlayer2()
     }
-
+    console.log(e.key)
     estado = teclasApertadas(e, estado)
     console.log(estado.jogador1.indiceAtual)
     console.log(estado.jogador2.indiceAtual)
