@@ -77,21 +77,18 @@ body {
 
 .personagemP1{
     position: absolute;
-    width: 7rem;
-    height: 7rem;
-    left: 10rem;
-    top: 40rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 .personagemP2{
     position: absolute;
-    width: 7rem;
-    height: 7rem;
-    right: 10rem;
-    top: 40rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 .arena-ground {
+    position: relative;
     display: block;
     height: 10%;
     background-color: red;
