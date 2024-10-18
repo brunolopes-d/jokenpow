@@ -28,6 +28,7 @@ const estadoInicial = (personagem1, personagem2) => ({
         y: 125, // Posição inicial no eixo y na arena (acima do chão)
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
+        pulando: false // Usado para verificar se o jogador 1 não já está pulando
     },
 
     player2: {
@@ -38,6 +39,7 @@ const estadoInicial = (personagem1, personagem2) => ({
         y: 125, // Posição inicial no eixo y na arena (acima do chão)
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
+        pulando: false // Usado para verificar se o jogador 2 não já está pulando
     }
 })
 
@@ -68,7 +70,7 @@ const mover = (estado, jogador, direcao) => {
         }}
 }
 
-// Função responsável por definir a nova posição do personagem dentro da tela, utilizando como já
+// Função responsável por definir a nova posição horizontal do personagem dentro da tela, utilizando como já
 // mencionado posteriormente Computed Property Keys pra isso, ao final dela, retorna uma nova posição de X para 
 // qualquer um dos jogadores, visto a dinamicidade que só foi possível graças ao Computed Property Keys
 
@@ -84,6 +86,50 @@ const atualizaPos = (estado, jogador) => {
     }
 }
 
+// O sistema de coordenadas no eixo y em um navegador é feito de cima pra baixo, essa é a razão pela qual
+// usamos valores negativos para a velocidade no eixo y
+const pular = (estado, jogador) => {
+    // Só vai executar caso o jogador já não esteja pulando
+    if (!estado[jogador].pulando) {
+        return {
+            ...estado, 
+            [jogador]: {
+            ...estado[jogador], // Copia todo o estado, e retorna um novo estado apenas
+            vy: -15,            // com a velocidade vertical e pulando alterados.
+            pulando: true
+            }
+        }
+    }
+    return estado
+}
+
+// A função aplicar gravidade simula a gravidade, a cada frame a gravidade é adicionada a uma variável
+// chamada novaVy, somando até que ela chegue fique positiva novamente, quando o personagem
+// chegar no chão, visto que ela vai começar a ficar positiva, levando ele pra baixo, ela é setada para zero
+const aplicarGravidade = (estado, jogador) => {
+    const gravidade = 0.5; // Define o quão rápido o personagem vai cair
+
+    // Função também é responsável por calcular a nova posição do personagem no eixo y
+    const novoY = estado[jogador].y + estado[jogador].vy
+
+    const novaVy = estado[jogador].pulando ? estado[jogador].vy + gravidade : 0
+
+    // taNoChao recebe um boleeano que diz se o novoY do jogador é ou não maior do que a altura do chão
+    const taNoChao = novoY >= 125
+    return {
+        ...estado,
+        [jogador]: {
+            ...estado[jogador],
+            // Se ele estiver no chão, sua posição no eixo y é 125, se ele não estiver no chão, sua posição é o novo Y
+            y: taNoChao ? 125 : novoY,
+            // Se ele estiver no chão, sua velocidade no eixo y é igual a 0, ou seja, ele não tem velocidade para cima
+            // que seria a ação de pular, caso contrário, atualiza para sua nova velocidade y
+            vy: taNoChao ? 0 : novaVy,
+            pulando: taNoChao ? false : estado[jogador].pulando // Diz se o personagem está ou não pulando no momento
+        }
+    }
+}
+
 // Aqui adicionamos um escutador de eventos, para que sempre que uma tecla seja apertada, um evento seja
 // acionado, alterando o estado, de maneiras diferentes dependendo da tecla apertada, variando o valor
 // do vx da função mover por exemplo, e o personagem que se movimenta 
@@ -93,8 +139,13 @@ document.addEventListener('keydown', (e) => {
     if (e.key === "a") {
         estado = mover(estado, "player1", "esquerda")
     }
+
     if (e.key === "d") {
         estado = mover(estado, 'player1', "direita")
+    }
+
+    if (e.key === "w") {
+        estado = pular(estado, 'player1')
     }
 
     // Comandos para o player 2
@@ -102,8 +153,13 @@ document.addEventListener('keydown', (e) => {
     if (e.key === "ArrowLeft") {
         estado = mover(estado, "player2", "esquerda")
     }
+
     if (e.key === "ArrowRight") {
         estado = mover(estado, "player2", "direita")
+    }
+
+    if (e.key === "ArrowUp") {
+        estado = pular(estado, "player2")
     }
     
 })
@@ -111,6 +167,9 @@ document.addEventListener('keydown', (e) => {
 // Aqui, verificamos se o jogador soltou a tecla, para então definirmos sua velocidade para 0, caso contrário,
 // o personagem ficaria andando infinitamente para um dos lados, pois o vx continuaria sendo somado a posição
 // do x
+
+// Detalhe: Isso acaba causando um pequeno atraso ao mudar de posições, mas é o único jeito que encontramos
+// usando apenas o estado
 document.addEventListener("keyup", (e) => {
     if (e.key === "a" || e.key === "d") {
         estado = {...estado, player1: {
@@ -131,23 +190,20 @@ document.addEventListener("keyup", (e) => {
 // aqui dentro vai ser executado a pelo menos 60fps, o que possibilita que toda a questão de animações
 // seja realizada de maneira fluída, facilitando a realização da renderização dos movimentos de fato,
 // recebendo o novo estado com atualização de posição realizada, e posteriormente realizando o transform
-// para que o usuário consiga saber o que acontecei
+// para que o usuário consiga saber o que aconteceu
 const loopDeJogo = () => {
-    // Recebe o novo estado tanto do jogador1, como do jogador2, a cada repintura da tela com requestAnimationFrame
-    estado = atualizaPos(estado, 'player1')
-    estado = atualizaPos(estado, 'player2')
+    estado = aplicarGravidade(estado, "player1")
+    estado = aplicarGravidade(estado, "player2")
+    estado = atualizaPos(estado, "player1")
+    estado = atualizaPos(estado, "player2")
 
-    if (htmlPersonagemP1) {
-        htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`
-    }
+    // player 1 se mexendo na tela
+    htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`
+    // player 2 se mexendo na tela
+    htmlPersonagemP2.style.transform = `translate(${estado.player2.x}px, ${estado.player2.y}px)`
 
-    if (htmlPersonagemP2) {
-        htmlPersonagemP2.style.transform = `translate(${estado.player2.x}px, ${estado.player2.y}px)`
-    }
-    // Aqui o requestAnimationFrame, chama de novo a função loopDeJogo, a executando assim que o navegador
-    // tiver a próxima oortunidade, ou seja, na proxima atualização de frame
     requestAnimationFrame(loopDeJogo)
 }
 
-// Aqui iniciamos o loopDeJogo, e o requestAnimationFrame o mantém acontecendo.
+// Inicia o loop de jogo assim que a página carrega
 loopDeJogo()
