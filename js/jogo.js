@@ -49,6 +49,9 @@ const estadoInicial = (personagem1, personagem2) => ({
 // da aplicação 
 let estado = estadoInicial(p1, p2)
 
+// Audio do temporizador
+
+
 // Construção para temporizador antes da luta
 const temporizador = document.querySelector('.temporizador')
 
@@ -95,6 +98,7 @@ setTimeout( () => {
 setTimeout( () => {
     temporizador.innerText = ''
 }, 4500)
+
 
 
 // Função mover trata quanto a movimentação horizontal do usuário,
@@ -373,7 +377,7 @@ const loopDeJogo = () => {
     // Aqui o requestAnimationFrame, chama de novo a função loopDeJogo, a executando assim que o navegador
     // tiver a próxima oortunidade, ou seja, na proxima atualização de frame
     requestAnimationFrame(loopDeJogo)
-    console.log(estado)
+   
 }
 
 // Aqui iniciamos o loopDeJogo, e o requestAnimationFrame o mantém acontecendo.
