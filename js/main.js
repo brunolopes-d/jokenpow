@@ -13,12 +13,6 @@ botaoIniciar.addEventListener('click', () => {
     render(estado)
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = new Audio("/assets/music/Under Fire.mp3")
-    audio.play()
-    audio.loop = true;
-})
-
 // Criação de um estado inicial para a aplicação, a cada interação
 // com a tela de seleção de personagens, um novo estado é criado, 
 // e é então renderizado na tela
