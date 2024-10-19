@@ -156,13 +156,12 @@ const verificaColisao = (player1, player2) => {
 };
 
 const limitaPosicao = (x) => {
-    console.log(estado.player1.x, estado.player2.x)
     const limiteEsquerda = -850 // Limite para a borda da esquerda da arena
     const limiteDireita = 850 // Limite para a borda da direita da arena
     return Math.max(limiteEsquerda, Math.min(x, limiteDireita)); 
     // Aqui o limitaPosicao usa max e o min da própria engine do js, pra definir os valores posição do x,
     // impedindo ele de passar do -850, travando ele por conta do max, e travando ele de passar para 
-    // o limite da borda da direita por conta do min que retorna o menor valor entre eles
+    // o limite da boarda da direita por conta do min que retorna o menor valor entre eles
 };
 
 // O sistema de coordenadas no eixo y em um navegador é feito de cima pra baixo, essa é a razão pela qual
@@ -316,7 +315,7 @@ const loopDeJogo = () => {
 
     // Translada o jogador 1 dentro da arena, dependendo do eixo x que foi definido e atualizado no estado
     if (htmlPersonagemP1) {
-        htmlPersonagemP1.style.transform =  `translate(${estado.player1.x}px, ${estado.player1.y}px)`
+        htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`
     }
 
     // Translada o jogador 2 dentro da arena, dependendo do eixo x que foi definido e atualizado no estado
