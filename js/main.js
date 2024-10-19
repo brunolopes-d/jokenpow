@@ -192,15 +192,16 @@ const render = (estado) => {
 const botaoConfirmaP1 = document.querySelector('.left-confirm-character')
 const botaoConfirmaP2 = document.querySelector('.right-confirm-character')
 
+// Ao apertarem espaço ou enter, ele altera o texto interno do botão, depois há uma verificação
+// se o conteúdo de dentro dos botões de ambos é cancelar, caso sejam, levam eles para a arena,
+// isso foi feito de modo a evitar uma variável apenas saber quando eles estão prontos.
 const confirmaPlayer1 =  () => {
-    // Muda o texto do botão
     botaoConfirmaP1.innerText === 'Pronto' ? botaoConfirmaP1.innerText = 'Cancelar' : botaoConfirmaP1.innerText = 'Pronto'
     
     verificaSeJogadoresEstaoProntos()
 }
 
 const confirmaPlayer2 = () => {
-    // Muda o texto do botão
     botaoConfirmaP2.innerText === 'Pronto' ? botaoConfirmaP2.innerText = 'Cancelar' : botaoConfirmaP2.innerText = 'Pronto'
     verificaSeJogadoresEstaoProntos()
 }

@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+.telaVitoria { 
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tudo {
+    display: flex;
+    flex-direction: column;
+}
+
+.vencedor {
+    font-size: 3em;
+    font-family: "Pixelify Sans";
+    text-align: center;
+    color: #d00000;
+} 
+
+.piadinha {
+    font-size: 1.5em;
+    font-family: "Pixelify Sans";
+    color: white;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.botao {
+    color: white;
+    border: 0.1em solid rgb(136, 0, 0);
+    outline: none;
+    background-color: #d00000;
+    font-family: "Pixelify Sans";
+    font-size: 2em;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.revanche {
+    margin-bottom: 0.2em;
+}
+
+button.botao:active {
+    transform: translateY(3px);  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
