@@ -49,6 +49,54 @@ const estadoInicial = (personagem1, personagem2) => ({
 // da aplicação 
 let estado = estadoInicial(p1, p2)
 
+// Construção para temporizador antes da luta
+const temporizador = document.querySelector('.temporizador')
+
+// Essa função só vai ser chamada ao fim do temporizador,
+// possibilitando ao usuário se movimentar.
+const adicionarEventListeners = () => {
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+};
+
+// Com o passar do tempo, o paragrafo de classe '.temporizador'
+// muda seu innerText, dando feedback visual do tempo pro usuário.
+setTimeout( () => {
+    temporizador.innerText = '2'
+}, 1000)
+
+setTimeout( () => {
+    temporizador.innerText = '1'
+}, 2000)
+
+// Aqui o temporizador acaba e os eventListeners são acionados
+setTimeout( () => {
+    temporizador.innerText = 'LUTEM'
+    adicionarEventListeners();
+}, 3000)
+
+// Após isso, tem uma animação até a string 'LUTEM' sair da tela
+setTimeout( () => {
+    temporizador.innerText = ''
+}, 3300)
+
+setTimeout( () => {
+    temporizador.innerText = 'LUTEM'
+}, 3600)
+
+setTimeout( () => {
+    temporizador.innerText = ''
+}, 3900)
+
+setTimeout( () => {
+    temporizador.innerText = 'LUTEM'
+}, 4200)
+
+setTimeout( () => {
+    temporizador.innerText = ''
+}, 4500)
+
+
 // Função mover trata quanto a movimentação horizontal do usuário,
 // cada personagem vai ter uma movimentação diferente dependendo do 
 // personagem escolhido, o que foi feito utilizando operador ternário.
@@ -75,16 +123,94 @@ const mover = (estado, jogador, direcao) => {
 // qualquer um dos jogadores, visto a dinamicidade que só foi possível graças ao Computed Property Keys
 
 const atualizaPos = (estado, jogador) => {
-    const novoX = estado[jogador].x + estado[jogador].vx
-
-    return {
+    const novoX = estado[jogador].x + estado[jogador].vx;
+    
+    const novoEstado = {
         ...estado,
         [jogador]: {
             ...estado[jogador],
-            x: novoX
+            x: limitaPosicao(novoX)
+        }
+    };
+
+    if (jogador === "player1") {
+        const colidiu = verificaColisao(novoEstado.player1, novoEstado.player2);
+        if (colidiu) {
+            if (estado.player1.x < estado.player2.x) {
+                // Player 1 à esquerda, impede o movimento para a direita
+                return {
+                    ...novoEstado,
+                    player1: {
+                        ...novoEstado.player1,
+                        x: estado.player1.x // Impede de ir para a direita
+                    }
+                };
+            } else {
+                // Player 1 à direita, impede o movimento para a esquerda
+                return {
+                    ...novoEstado,
+                    player1: {
+                        ...novoEstado.player1,
+                        x: estado.player1.x // Impede de ir para a esquerda
+                    }
+                };
+            }
         }
     }
-}
+
+    if (jogador === "player2") {
+        const colidiu = verificaColisao(novoEstado.player2, novoEstado.player1);
+        if (colidiu) {
+            if (estado.player2.x < estado.player1.x) {
+                // Player 2 à esquerda, impede o movimento para a direita
+                return {
+                    ...novoEstado,
+                    player2: {
+                        ...novoEstado.player2,
+                        x: estado.player2.x // Impede de ir para a direita
+                    }
+                };
+            } else {
+                // Player 2 à direita, impede o movimento para a esquerda
+                return {
+                    ...novoEstado,
+                    player2: {
+                        ...novoEstado.player2,
+                        x: estado.player2.x // Impede de ir para a esquerda
+                    }
+                };
+            }
+        }
+    }
+
+    return novoEstado;
+};
+
+// Função responsável por verificar se dois personagens colidiram, tanto
+// verticalmente como horizontalmente
+const verificaColisao = (player1, player2) => {
+    const larguraPersonagemP1 = htmlPersonagemP1.offsetWidth;
+    const alturaPersonagemP1 = htmlPersonagemP1.offsetHeight;
+    const larguraPersonagemP2 = htmlPersonagemP2.offsetWidth;
+    const alturaPersonagemP2 = htmlPersonagemP2.offsetHeight;
+
+    return (
+        // Se o lado esquerdo do jogador 1 
+        player1.x < player2.x + larguraPersonagemP2 &&
+        player1.x + larguraPersonagemP1 > player2.x &&
+        player1.y < player2.y + alturaPersonagemP2 &&
+        player1.y + alturaPersonagemP1 > player2.y
+    );
+};
+
+const limitaPosicao = (x) => {
+    const limiteEsquerda = -850 // Limite para a borda da esquerda da arena
+    const limiteDireita = 850 // Limite para a borda da direita da arena
+    return Math.max(limiteEsquerda, Math.min(x, limiteDireita)); 
+    // Aqui o limitaPosicao usa max e o min da própria engine do js, pra definir os valores posição do x,
+    // impedindo ele de passar do -850, travando ele por conta do max, e travando ele de passar para 
+    // o limite da boarda da direita por conta do min que retorna o menor valor entre eles
+};
 
 // O sistema de coordenadas no eixo y em um navegador é feito de cima pra baixo, essa é a razão pela qual
 // usamos valores negativos para a velocidade no eixo y
@@ -114,9 +240,9 @@ const aplicarGravidade = (estado, jogador) => {
 
     const novaVy = estado[jogador].pulando ? estado[jogador].vy + gravidade : 0
 
-    // taNoChao recebe um boleeano que diz se o novoY do jogador é ou não maior do que a altura do chão
+    // taNoChao recebe um boleeano que diz se o novoY do jogador está ou não em uma altura maior do que a altura do chão
     const taNoChao = novoY >= 125
-    return {
+    const novoEstado = {
         ...estado,
         [jogador]: {
             ...estado[jogador],
@@ -128,12 +254,49 @@ const aplicarGravidade = (estado, jogador) => {
             pulando: taNoChao ? false : estado[jogador].pulando // Diz se o personagem está ou não pulando no momento
         }
     }
-}
+
+    const jogadorAtual = novoEstado[jogador]; // Pega o jogador atual que está se realizando a ação de pular
+    const outroJogador = jogador === "player1" ? estado.player2 : estado.player1; // Pega o outro jogador que não é o atual
+
+    // Verifica colisão entre os jogadores, o jogador atual e o outro jogador, chamando a função verifica colisão com os dois jogadores
+    const colidiu = verificaColisao(jogadorAtual, outroJogador);
+
+    if (colidiu) {
+       // Se o jogador colidiu, visto que colidiu é um booleano, ele vai executar esse bloco
+        if (jogadorAtual.y < outroJogador.y) {
+            // Aqui, vai haver uma verificação se o jogador atual está em cima do outro jogador, 
+            // importante lembrar que o quanto menor o y, mais em cima o jogador está, por isso <
+            return {
+                ...novoEstado,
+                [jogador]: {
+                    ...novoEstado[jogador],
+                    y: estado[jogador].y, // Mantém a última posição de y registrada, ou seja, acima do jogador
+                    vy: Math.min(0, estado[jogador].vy)  // Usa Math.min para possibilitar pulos quando o jogador está acima de
+                                                        // outro, mas impede a descida, visto que o maior valor possível vai ser 0
+                }
+            };
+        } else {
+            // Se o jogador atual está abaixo, ele não pode subir mais
+            return {
+                ...novoEstado,
+                [jogador]: {
+                    ...novoEstado[jogador],
+                    y: estado[jogador].y, // Mantém a posição Y anterior
+                    vy: Math.max(0, estado[jogador].vy)  // Impede que o jogador consiga atravessar de baixo para cima o  outro jogador,
+                                                         // retornando sempre valores que sejam positivos por conta do Math.max
+                }
+            };
+        }
+    }
+
+    return novoEstado; // Retorna o novo estado caso não tenha acontecido uma colisão
+};
+
 
 // Aqui adicionamos um escutador de eventos, para que sempre que uma tecla seja apertada, um evento seja
 // acionado, alterando o estado, de maneiras diferentes dependendo da tecla apertada, variando o valor
 // do vx da função mover por exemplo, e o personagem que se movimenta 
-document.addEventListener('keydown', (e) => {
+const handleKeyDown =  (e) => {
     // Comandos para o player 1
 
     if (e.key === "a") {
@@ -162,7 +325,7 @@ document.addEventListener('keydown', (e) => {
         estado = pular(estado, "player2")
     }
     
-})
+}
 
 // Aqui, verificamos se o jogador soltou a tecla, para então definirmos sua velocidade para 0, caso contrário,
 // o personagem ficaria andando infinitamente para um dos lados, pois o vx continuaria sendo somado a posição
@@ -170,7 +333,7 @@ document.addEventListener('keydown', (e) => {
 
 // Detalhe: Isso acaba causando um pequeno atraso ao mudar de posições, mas é o único jeito que encontramos
 // usando apenas o estado
-document.addEventListener("keyup", (e) => {
+const handleKeyUp =  (e) => {
     if (e.key === "a" || e.key === "d") {
         estado = {...estado, player1: {
             ...estado.player1,
@@ -184,7 +347,7 @@ document.addEventListener("keyup", (e) => {
             vx: 0
         }}
     }
-})
+}
 
 // Loop de jogo, a parte mais importante da aplicação, usando o requestAnimationFrame, tudo que estiver
 // aqui dentro vai ser executado a pelo menos 60fps, o que possibilita que toda a questão de animações
@@ -192,18 +355,26 @@ document.addEventListener("keyup", (e) => {
 // recebendo o novo estado com atualização de posição realizada, e posteriormente realizando o transform
 // para que o usuário consiga saber o que aconteceu
 const loopDeJogo = () => {
-    estado = aplicarGravidade(estado, "player1")
-    estado = aplicarGravidade(estado, "player2")
-    estado = atualizaPos(estado, "player1")
-    estado = atualizaPos(estado, "player2")
+    // Recebe o novo estado tanto do jogador1, como do jogador2, a cada repintura da tela com requestAnimationFrame
+    estado = atualizaPos(estado, 'player1')
+    estado = atualizaPos(estado, 'player2')
+    estado = aplicarGravidade(estado, 'player1')
+    estado = aplicarGravidade(estado, 'player2')
 
-    // player 1 se mexendo na tela
-    htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`
-    // player 2 se mexendo na tela
-    htmlPersonagemP2.style.transform = `translate(${estado.player2.x}px, ${estado.player2.y}px)`
+    // Translada o jogador 1 dentro da arena, dependendo do eixo x que foi definido e atualizado no estado
+    if (htmlPersonagemP1) {
+        htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`
+    }
 
+    // Translada o jogador 2 dentro da arena, dependendo do eixo x que foi definido e atualizado no estado
+    if (htmlPersonagemP2) {
+        htmlPersonagemP2.style.transform = `translate(${estado.player2.x}px, ${estado.player2.y}px)`
+    }
+    // Aqui o requestAnimationFrame, chama de novo a função loopDeJogo, a executando assim que o navegador
+    // tiver a próxima oortunidade, ou seja, na proxima atualização de frame
     requestAnimationFrame(loopDeJogo)
+    console.log(estado)
 }
 
-// Inicia o loop de jogo assim que a página carrega
+// Aqui iniciamos o loopDeJogo, e o requestAnimationFrame o mantém acontecendo.
 loopDeJogo()
