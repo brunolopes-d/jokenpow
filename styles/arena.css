@@ -57,6 +57,19 @@ body {
     width: 100%; /* Vida máxima */
 }
 
+.temporizador{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+    font-size: 20rem;
+    height: 20rem;
+    width: 20rem;
+    z-index: 10;
+    font-family: "Pixelify Sans";
+    color: red;
+}
+
 /* Plataforma */
 .arena {
     display: flex;

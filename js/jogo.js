@@ -49,6 +49,54 @@ const estadoInicial = (personagem1, personagem2) => ({
 // da aplicação 
 let estado = estadoInicial(p1, p2)
 
+// Construção para temporizador antes da luta
+const temporizador = document.querySelector('.temporizador')
+
+// Essa função só vai ser chamada ao fim do temporizador,
+// possibilitando ao usuário se movimentar.
+const adicionarEventListeners = () => {
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+};
+
+// Com o passar do tempo, o paragrafo de classe '.temporizador'
+// muda seu innerText, dando feedback visual do tempo pro usuário.
+setTimeout( () => {
+    temporizador.innerText = '2'
+}, 1000)
+
+setTimeout( () => {
+    temporizador.innerText = '1'
+}, 2000)
+
+// Aqui o temporizador acaba e os eventListeners são acionados
+setTimeout( () => {
+    temporizador.innerText = 'LUTEM'
+    adicionarEventListeners();
+}, 3000)
+
+// Após isso, tem uma animação até a string 'LUTEM' sair da tela
+setTimeout( () => {
+    temporizador.innerText = ''
+}, 3300)
+
+setTimeout( () => {
+    temporizador.innerText = 'LUTEM'
+}, 3600)
+
+setTimeout( () => {
+    temporizador.innerText = ''
+}, 3900)
+
+setTimeout( () => {
+    temporizador.innerText = 'LUTEM'
+}, 4200)
+
+setTimeout( () => {
+    temporizador.innerText = ''
+}, 4500)
+
+
 // Função mover trata quanto a movimentação horizontal do usuário,
 // cada personagem vai ter uma movimentação diferente dependendo do 
 // personagem escolhido, o que foi feito utilizando operador ternário.
@@ -248,7 +296,7 @@ const aplicarGravidade = (estado, jogador) => {
 // Aqui adicionamos um escutador de eventos, para que sempre que uma tecla seja apertada, um evento seja
 // acionado, alterando o estado, de maneiras diferentes dependendo da tecla apertada, variando o valor
 // do vx da função mover por exemplo, e o personagem que se movimenta 
-document.addEventListener('keydown', (e) => {
+const handleKeyDown =  (e) => {
     // Comandos para o player 1
 
     if (e.key === "a") {
@@ -277,7 +325,7 @@ document.addEventListener('keydown', (e) => {
         estado = pular(estado, "player2")
     }
     
-})
+}
 
 // Aqui, verificamos se o jogador soltou a tecla, para então definirmos sua velocidade para 0, caso contrário,
 // o personagem ficaria andando infinitamente para um dos lados, pois o vx continuaria sendo somado a posição
@@ -285,7 +333,7 @@ document.addEventListener('keydown', (e) => {
 
 // Detalhe: Isso acaba causando um pequeno atraso ao mudar de posições, mas é o único jeito que encontramos
 // usando apenas o estado
-document.addEventListener("keyup", (e) => {
+const handleKeyUp =  (e) => {
     if (e.key === "a" || e.key === "d") {
         estado = {...estado, player1: {
             ...estado.player1,
@@ -299,7 +347,7 @@ document.addEventListener("keyup", (e) => {
             vx: 0
         }}
     }
-})
+}
 
 // Loop de jogo, a parte mais importante da aplicação, usando o requestAnimationFrame, tudo que estiver
 // aqui dentro vai ser executado a pelo menos 60fps, o que possibilita que toda a questão de animações
