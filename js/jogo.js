@@ -5,8 +5,12 @@ const p1 = params.get("personagem1");
 const p2 = params.get("personagem2");
 
 // Pegar os elementos dos personagens
-const htmlPersonagemP1 = document.querySelector('.personagemP1');
-const htmlPersonagemP2 = document.querySelector('.personagemP2');
+const htmlPersonagemP1 = document.querySelector('.personagemContainerP1');
+const htmlPersonagemP2 = document.querySelector('.personagemContainerP2');
+
+// Pega as imagens de dentro do container dos personagens
+const imgPersonagem1 = document.querySelector('.personagemP1');
+const imgPersonagem2 = document.querySelector('.personagemP2');
 
 // Definir os nomes dos personagens
 const nomeP1 = document.querySelector('.personagemNomeP1');
@@ -16,8 +20,17 @@ nomeP1.innerText = p1;
 nomeP2.innerText = p2;
 
 // Mudar o src das imagens para os personagens escolhidos
-htmlPersonagemP1.setAttribute('src', `assets/images/personagens/${p1}.png`);
-htmlPersonagemP2.setAttribute('src', `assets/images/personagens/${p2}.png`);
+imgPersonagem1.setAttribute('src', `assets/images/personagens/${p1}.png`);
+imgPersonagem2.setAttribute('src', `assets/images/personagens/${p2}.png`);
+
+const somAtaquePedra = new Audio('./assets/audios/PedraAtaque.mp3');
+const somAtaquePapel = new Audio('./assets/audios/PapelAtaque.wav');
+const somAtaqueTesoura = new Audio('./assets/audios/TesouraAtaque.wav');
+
+const musica = new Audio('./assets/music/Under Fire.mp3');
+musica.play()
+musica.volume = 0.2;
+musica.loop = true
 
 const estadoInicial = (personagem1, personagem2) => ({
     player1: {
@@ -29,7 +42,8 @@ const estadoInicial = (personagem1, personagem2) => ({
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
         direcao: 'direita', // Personagem que está a esquerda, inicialmente começa olhando para a direita
-        pulando: false // Usado para verificar se o jogador 1 não já está pulando
+        pulando: false, // Usado para verificar se o jogador 1 não já está pulando
+        morto: false
     },
 
     player2: {
@@ -41,7 +55,8 @@ const estadoInicial = (personagem1, personagem2) => ({
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
         direcao: 'esquerda', // Personagem que está a direita, inicialmente começa olhando para a esquerda
-        pulando: false // Usado para verificar se o jogador 2 não já está pulando
+        pulando: false, // Usado para verificar se o jogador 2 não já está pulando
+        morto: false
     }
 })
 
@@ -57,7 +72,7 @@ let estado = estadoInicial(p1, p2)
 const temporizador = document.querySelector('.temporizador')
 
 // Essa função só vai ser chamada ao fim do temporizador,
-// possibilitando ao usuário se movimentar.
+// possibilitando ao jogador se movimentar.
 const adicionarEventListeners = () => {
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
@@ -81,6 +96,7 @@ setTimeout( () => {
 
 // Após isso, tem uma animação até a string 'LUTEM' sair da tela
 setTimeout( () => {
+    musica.volume = 1;
     temporizador.innerText = ''
 }, 3300)
 
@@ -327,6 +343,14 @@ const atacar = (estado, jogador) => {
             // Definimos o dano base de cada ataque
             const dano = 10;
 
+            if (estado[jogador].personagem === "Pedra") {
+                somAtaquePedra.play()
+            } else if (estado[jogador].personagem === "Papel") {
+                somAtaquePapel.play()
+            } else {
+                somAtaqueTesoura.play()
+            }
+
             // Chama a função atualizar a barra HP para atualizar o dano sofrido
             atualizarBarraHP()
 
@@ -434,11 +458,17 @@ const verificarVitoria = () => {
     const barraDeVidaP2 = document.querySelector(".player2-health")
 
     if (barraDeVidaP1.style.width === `0%`) {
-        window.location.href = `vitoria.html?ganhador=${p2}&perdedor=${p1}`;
+        setInterval(() => {
+            window.location.href = `vitoria.html?ganhador=${p2}&perdedor=${p1}`;
+        }, 10000)
+        htmlPersonagemP2.classList.add('morto')
     }
 
     if (barraDeVidaP2.style.width === `0%`) {
-        window.location.href = `vitoria.html?ganhador=${p1}&perdedor=${p2}`;
+        setInterval(() => {
+            window.location.href = `vitoria.html?ganhador=${p1}&perdedor=${p2}`;
+        }, 10000)
+        htmlPersonagemP2.classList.add('morto')
     }
 }
 
@@ -456,12 +486,12 @@ const loopDeJogo = () => {
 
     // Translada o jogador 1 dentro da arena, dependendo do eixo x que foi definido e atualizado no estado
     if (htmlPersonagemP1) {
-        htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`
+        htmlPersonagemP1.style.transform = `translate(${estado.player1.x}px, ${estado.player1.y}px)`;
     }
 
     // Translada o jogador 2 dentro da arena, dependendo do eixo x que foi definido e atualizado no estado
     if (htmlPersonagemP2) {
-        htmlPersonagemP2.style.transform = `translate(${estado.player2.x}px, ${estado.player2.y}px)`
+        htmlPersonagemP2.style.transform = `translate(${estado.player2.x}px, ${estado.player2.y}px)`;
     }
     // Aqui o requestAnimationFrame, chama de novo a função loopDeJogo, a executando assim que o navegador
     // tiver a próxima oortunidade, ou seja, na proxima atualização de frame
