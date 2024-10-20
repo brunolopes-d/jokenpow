@@ -3,10 +3,6 @@ const params = new URLSearchParams(window.location.search);
 const ganhador = params.get("ganhador");
 const perdedor = params.get("perdedor");
 
-const vitoriaDiv = document.querySelector(".vencedor")
-vitoriaDiv.innerHTML = `A ${ganhador} saiu vitoriosa.`
-const piadinha = document.querySelector(".piadinha");
-
 const vitoriaDiv = document.querySelector(".vencedor");
 vitoriaDiv.innerHTML = `A ${ganhador} saiu vitoriosa.`;
 
@@ -18,8 +14,6 @@ document.querySelector('.voltarTelaInicial').addEventListener('click', function(
 });
 
 document.querySelector('.revanche').addEventListener('click', function() {
-    // Redireciona para arena.html com os personagens e o ganhador
-    window.location.href = `arena.html?ganhador=${ganhador}&perdedor=${perdedor}`;
     // Redireciona para arena.html com personagem1 como o ganhador e personagem2 como o perdedor
     window.location.href = `arena.html?personagem1=${ganhador}&personagem2=${perdedor}`;
 });
