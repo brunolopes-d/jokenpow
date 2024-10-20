@@ -219,6 +219,11 @@ button.start-button:active, button.instrucoes:active {
     padding: 10px;
 }
 
+.personagem1, .personagem2 {
+    width: 414px;
+    height: 474px;
+}
+
 .habilitiesP1 {
     margin-top: 30px;
     display: flex;

@@ -88,16 +88,49 @@ body {
     background-color: red;
 }
 
-.personagemP1{
+.personagemContainerP1, .personagemContainerP2 {
     position: absolute;
+}
+
+.personagemP1, .personagemP2 {
+    display: block;
     width: 10rem;
     height: 10rem;
 }
 
-.personagemP2{
+.seta {
+    width: 30px; 
+    height: 25px; 
+    image-rendering: pixelated;
     position: absolute;
-    width: 10rem;
-    height: 10rem;
+    top: -30px; 
+    left: 50%; 
+    transform: translateX(-70%); 
+    opacity: 0.7;
+}
+
+/*  Mesma lógica utilizada na parte de seleção de personagens */
+@keyframes piscando {
+    0% {
+      filter: brightness(90%);  /* Cor normal */
+    }
+    50% {
+      filter: brightness(30%);   /* Escurecer um pouco */
+    }
+    100% {
+      filter: brightness(90%);  /* Voltar ao normal */
+    }
+  }
+
+  .piscando {
+    animation: piscando 1.5s infinite;
+}
+
+
+
+.seta > img {
+    width: 100%;
+    height: 100%;
 }
 
 .arena-ground {
@@ -105,4 +138,22 @@ body {
     display: block;
     height: 10%;
     background-color: red;
+}
+
+@keyframes cairParaTras {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    100% {
+        transform: translateY(300px) rotate(90deg);
+    }
+}
+
+.morto {
+    animation: cairParaTras 5s ease-in forwards;
 }
