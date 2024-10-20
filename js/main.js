@@ -13,6 +13,22 @@ botaoIniciar.addEventListener('click', () => {
     render(estado)
 })
 
+
+// Abrir dialog quando o botão "instruções for clicado"
+const botaoInstrucoes = document.querySelector('.instrucoes')
+const dialog = document.querySelector('.instrucoes-modal')
+
+botaoInstrucoes.addEventListener('click', () =>  {
+    dialog.showModal()
+})
+
+if(dialog){
+    const closeModalButton = document.querySelector('.fechar-modal')
+    closeModalButton.addEventListener('click', () => {
+        dialog.close()
+    })
+}
+
 // Criação de um estado inicial para a aplicação, a cada interação
 // com a tela de seleção de personagens, um novo estado é criado, 
 // e é então renderizado na tela
