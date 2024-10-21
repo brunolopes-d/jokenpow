@@ -1,4 +1,6 @@
 const botaoIniciar = document.querySelector(".start-button")
+const botaoMusicaAtivar = document.querySelector(".ativarMusica")
+const botaoMusicaDesativar = document.querySelector(".desativarMusica")
 const telaInicial = document.querySelector(".telainicial")
 const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
 const audio = document.querySelector("#audio")
@@ -20,6 +22,15 @@ botaoIniciar.addEventListener('click', () => {
     // Renderizar a nova tela com personagem do indice inicial (pedra)
     render(estado)
 })
+
+botaoMusicaAtivar.addEventListener('click', () => {
+    audio.play()
+})
+
+botaoMusicaDesativar.addEventListener('click', () => {
+    audio.pause()
+})
+
 
 
 // Abrir dialog quando o botão "instruções for clicado"
@@ -53,7 +64,6 @@ const estadoInicial = () => ({
         indiceAtual: 0
     }
 });
-
 
 // O estado é mutável
 let estado = estadoInicial();
@@ -106,7 +116,7 @@ document.addEventListener('keydown', (e) => {
     console.log(estado.jogador1.indiceAtual)
     console.log(estado.jogador2.indiceAtual)
     render(estado)
-} )
+})
 
 const render = (estado) => {
     const espacoPersonagem1 = document.querySelector(".personagem1")
