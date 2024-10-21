@@ -134,6 +134,7 @@ const vidaMaximaP2 = estado.player2.vida
 const mover = (estado, jogador, direcao) => {
     const velocidade = estado[jogador].personagem === "Pedra" ? 5 : estado[jogador].personagem === "Papel" ? 10 : 7.5
     const novaVelocidade = direcao === 'esquerda' ? -velocidade : velocidade;
+
     return {
         ...estado, 
         [jogador]: { // Importante destacar aqui que fazemos uso Computed Property Keys, basicamente nos permite acessar de maneira dinâmica propriedades dentro de um registro
