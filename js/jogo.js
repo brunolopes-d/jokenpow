@@ -23,6 +23,8 @@ nomeP2.innerText = p2;
 imgPersonagem1.setAttribute('src', `assets/images/personagens/${p1}.png`);
 imgPersonagem2.setAttribute('src', `assets/images/personagens/${p2}.png`);
 
+const chao = document.querySelector('.chao')
+
 const somAtaquePedra = new Audio('./assets/audios/PedraAtaque.mp3');
 const somAtaquePapel = new Audio('./assets/audios/PapelAtaque.wav');
 const somAtaqueTesoura = new Audio('./assets/audios/TesouraAtaque.wav');
@@ -32,33 +34,33 @@ musica.play()
 musica.volume = 0.2;
 musica.loop = true
 
-const estadoInicial = (personagem1, personagem2) => ({
-    player1: {
-        personagem: personagem1,
-        vida: personagem1 === "Pedra" ? 200 : personagem1 == "Papel" ? 100 : personagem1 == "Tesoura" ? 150 : "Erro",
-        // Operador Ternário para decidir qual a vida do personagem baseado no personagem escolhido ^
-        x: -600, // Posição inicial no eixo x na arena
-        y: 125, // Posição inicial no eixo y na arena (acima do chão)
-        vx: 0, // Velocidade no eixo x
-        vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
-        direcao: 'direita', // Personagem que está a esquerda, inicialmente começa olhando para a direita
-        pulando: false, // Usado para verificar se o jogador 1 não já está pulando
-        morto: false
+const estadoInicial = (personagem1, personagem2) => {
+    return {
+        player1: {
+            personagem: personagem1,
+            vida: personagem1 === "Pedra" ? 175 : personagem1 == "Papel" ? 125 : personagem1 == "Tesoura" ? 150 : "Erro",
+            // Operador Ternário para decidir qual a vida do personagem baseado no personagem escolhido ^
+            x: -600, // Posição inicial no eixo x na arena
+            y: 125, // Posição inicial no eixo y na arena (acima do chão)
+            vx: 0, // Velocidade no eixo x
+            vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
+            direcao: 'direita', // Personagem que está a esquerda, inicialmente começa olhando para a direita
+            pulando: false, // Usado para verificar se o jogador 1 não já está pulando
     },
 
-    player2: {
-        personagem: personagem2,
-        vida: personagem2 === "Pedra" ? 200 : personagem2 == "Papel" ? 100 : personagem2 == "Tesoura" ? 150 : "Erro",
-        // Operador Ternário para decidir qual a vida do personagem baseado no personagem escolhido ^
-        x: 600, // Posição inicial no eixo x na arena
-        y: 125, // Posição inicial no eixo y na arena (acima do chão)
-        vx: 0, // Velocidade no eixo x
-        vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
-        direcao: 'esquerda', // Personagem que está a direita, inicialmente começa olhando para a esquerda
-        pulando: false, // Usado para verificar se o jogador 2 não já está pulando
-        morto: false
+        player2: {
+            personagem: personagem2,
+            vida: personagem2 === "Pedra" ? 200 : personagem2 == "Papel" ? 100 : personagem2 == "Tesoura" ? 150 : "Erro",
+            // Operador Ternário para decidir qual a vida do personagem baseado no personagem escolhido ^
+            x: 600, // Posição inicial no eixo x na arena
+            y: 125, // Posição inicial no eixo y na arena (acima do chão)
+            vx: 0, // Velocidade no eixo x
+            vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
+            direcao: 'esquerda', // Personagem que está a direita, inicialmente começa olhando para a esquerda
+            pulando: false, // Usado para verificar se o jogador 2 não já está pulando
     }
-})
+    }
+}
 
 // O estado é mutável
 // Aqui setamos nosso estado inicial, mandamos como parâmetro
@@ -130,7 +132,7 @@ const vidaMaximaP2 = estado.player2.vida
 
 // Ao final, é retornado um novo estado, com a velocidade do jogador alterada.
 const mover = (estado, jogador, direcao) => {
-    const velocidade = estado[jogador].personagem === "Pedra" ? 3 : estado[jogador].personagem === "Papel" ? 10 : 5
+    const velocidade = estado[jogador].personagem === "Pedra" ? 5 : estado[jogador].personagem === "Papel" ? 10 : 7.5
     const novaVelocidade = direcao === 'esquerda' ? -velocidade : velocidade;
     return {
         ...estado, 
@@ -340,8 +342,14 @@ const atacar = (estado, jogador) => {
 
             // Caso seja, o ataque será bem-sucedido, e o oponente sofrerá dano
 
-            // Definimos o dano base de cada ataque
-            const dano = 10;
+            // Definimos o dano base de cada ataque dependendo do personagem escolhido
+            const dano = estado[jogador].personagem === "Pedra" ? 15 : estado[jogador].personagem === "Papel" ? 10 : 20;
+
+            if (oponente === "player1") {
+                deixarVermelhoMomentaneamente(htmlPersonagemP1)
+            } else {
+                deixarVermelhoMomentaneamente(htmlPersonagemP2)
+            }
 
             if (estado[jogador].personagem === "Pedra") {
                 somAtaquePedra.play()
@@ -368,6 +376,16 @@ const atacar = (estado, jogador) => {
 
     return estado; // Retorna o estado sem alterações se o ataque não foi bem-sucedido
 };
+
+const deixarVermelhoMomentaneamente = (personagem) => {
+    // Adiciona a classe 'flash' ao personagem
+    personagem.classList.add('flash');
+
+    // Remove a classe 'flash' após a animação
+    setTimeout(() => {
+        personagem.classList.remove('flash');
+    }, 500); // Duração da animação
+}
 
 const atualizarBarraHP = () => {
     const barraDeVidaP1 = document.querySelector(".player1-health");
@@ -404,30 +422,21 @@ const handleKeyDown =  (e) => {
 
     // Teclas de ataque do player 1 
 
-    if (e.key === "q") {
-        estado = atacar(estado, "player1")
-    }
-
     // Comandos para o player 2
 
-    if (e.key === "ArrowLeft") {
+    if (e.key === "j") {
         estado = mover(estado, "player2", "esquerda")
     }
 
-    if (e.key === "ArrowRight") {
+    if (e.key === "l") {
         estado = mover(estado, "player2", "direita")
     }
 
-    if (e.key === "ArrowUp") {
+    if (e.key === "i") {
         estado = pular(estado, "player2")
     }
 
     // Teclas de ataque do player 2
-
-    if (e.key === "Shift") {
-        estado = atacar(estado, "player2")
-    }
-
     
 }
 
@@ -445,12 +454,21 @@ const handleKeyUp =  (e) => {
         }}
     }
 
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+    if (e.key === "j" || e.key === "l") {
         estado = {...estado, player2: {
             ...estado.player2,
             vx: 0
         }}
     }
+
+    if (e.key === "Shift") {
+        estado = atacar(estado, "player1")
+    }
+
+    if (e.key === ";") {
+        estado = atacar(estado, "player2")
+    }
+
 }
 
 const verificarVitoria = () => {
@@ -460,14 +478,14 @@ const verificarVitoria = () => {
     if (barraDeVidaP1.style.width === `0%`) {
         setInterval(() => {
             window.location.href = `vitoria.html?ganhador=${p2}&perdedor=${p1}`;
-        }, 10000)
-        htmlPersonagemP2.classList.add('morto')
+        }, 7000)
+        htmlPersonagemP1.classList.add('morto')
     }
 
     if (barraDeVidaP2.style.width === `0%`) {
         setInterval(() => {
             window.location.href = `vitoria.html?ganhador=${p1}&perdedor=${p2}`;
-        }, 10000)
+        }, 7000)
         htmlPersonagemP2.classList.add('morto')
     }
 }

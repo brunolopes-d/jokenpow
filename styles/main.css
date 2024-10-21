@@ -7,14 +7,6 @@ html, body {
     height: 100%;
 }
 
-#game-container{
-    width: 1370px;   
-    height: 828px;  
-    margin: 0 auto; 
-    background-color: #f0f0f0;  
-    position: relative; 
-}
-
 .telainicial {
     background-color: black;
     height: 100vh;
@@ -40,16 +32,23 @@ html, body {
 /* CSS do dialog */
 
 .instrucoes-modal{
-    border: 1px solid white;
+    border: 3px solid #d00000;
     background-color: black;
     border-radius: 5px;
     font-family: "Pixelify Sans";
+    width: 30%;
+    backdrop-filter: blur(5px);
+}
+
+.instrucoes-modal p {
+    font-size: 1.3em;
 }
 
 .modal-container{
+    position: relative;
     display: flex;
-    flex-direction: column-reverse;
-    align-items: end;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     width: 100%;
     height: 100%;
@@ -58,8 +57,12 @@ html, body {
 }
 
 .fechar-modal{
+    position: absolute;
+    top: 10px;
+    right: 10px;
     height: 2rem;
     width: 2rem;
+    color: white;
     background-color: #d00000;
     border: 1px solid rgb(88, 1, 1);
     border-radius: 5px;
@@ -68,6 +71,7 @@ html, body {
     font-family: "Pixelify Sans";
 }
 .fechar-modal:hover{
+    color: white;
     background-color: rgb(129, 0, 0);
     cursor: pointer;
 }
@@ -207,49 +211,41 @@ button.start-button:active, button.instrucoes:active {
 
 .character {
     width: 100%;
-    height: 75%;
 }
 
 .characterselected {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    text-align: center;
     padding: 10px;
 }
 
 .personagem1, .personagem2 {
-    width: 414px;
-    height: 474px;
+    width: 400px;
+    height: 400px;
+    margin-bottom: 40px;
 }
 
-.habilitiesP1 {
-    margin-top: 30px;
+.atributos {
     display: flex;
-    width: 40%;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    font-family: "Pixelify Sans";
+    font-weight: bold;
+    font-size: 1.7em;
+    color: #ffffff;
+    width: 70%;
+    margin-bottom: 25px;
 }
 
-.habilitiesP2 {
-    margin-top: 30px;
+.atributo {
     display: flex;
-    width: 40%;
     justify-content: space-between;
-    align-items: center;
+    margin-bottom: 15px;
 }
 
-.habilitiesP1 > .hab {
-    background-color: rgb(121, 0, 0);
-    padding: 45px;
-    border-radius: 50%;
-}
-
-.habilitiesP2 > .hab {
-    background-color: rgb(0, 11, 107);
-    padding: 45px;
-    border-radius: 50%;
+.atributo img {
+    width: 30px;
+    height: 30px;
 }
 
 .button-wrapper{

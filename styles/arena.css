@@ -133,7 +133,7 @@ body {
     height: 100%;
 }
 
-.arena-ground {
+.arena-chao {
     position: relative;
     display: block;
     height: 10%;
@@ -152,6 +152,24 @@ body {
     100% {
         transform: translateY(300px) rotate(90deg);
     }
+}
+
+@keyframes flashRed {
+    0% {
+        filter: none;
+    }
+
+    50% {
+        filter: brightness(0) saturate(100%) hue-rotate(0deg) invert(1); /* Muda para vermelho */
+    }
+
+    100% {
+        filter:none
+    }
+}
+
+.dano {
+    animation: flashRed 0.5s forwards; /* Aplica a animação por 0.5 segundos */
 }
 
 .morto {

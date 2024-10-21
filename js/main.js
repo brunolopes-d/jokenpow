@@ -3,6 +3,14 @@ const telaInicial = document.querySelector(".telainicial")
 const telaSelecaoPersonagem = document.querySelector(".selecaopersonagens")
 const audio = document.querySelector("#audio")
 
+// Definição dos atributos dos personagens
+const pedraAtributos = [0, 0, 0, 0, 0, 1, 1, 2, 2, 2]
+const papelAtributos = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2]
+const tesouraAtributos = [0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
+
+const estrelaVermelha = document.createElement('img').setAttribute('src', `/assets/images/EstrelaVermelha.png`)
+const estrelaAzul = document.createElement('img').setAttribute('src', `/assets/images/EstrelaAzul.png`)
+
 // Mudar para tela de seleção de personagem, quando 
 // o botaoIniciar for clicado
 
@@ -109,6 +117,14 @@ const render = (estado) => {
     const quadradoPapel = document.querySelector(".papel")
     const quadradoTesoura = document.querySelector(".tesoura")
 
+    const resistenciaP1 = document.querySelector(".resistenciaP1")
+    const velocidadeP1 = document.querySelector(".velocidadeP1")
+    const letalidadeP1 = document.querySelector(".letalidadeP1")
+
+    const resistenciaP2 = document.querySelector(".resistenciaP2")
+    const velocidadeP2 = document.querySelector(".velocidadeP2")
+    const letalidadeP2 = document.querySelector(".letalidadeP2")
+
     // Para o Jogador 1
     switch(personagemJogador1) {
         case "Pedra":
@@ -116,6 +132,43 @@ const render = (estado) => {
             if (quadradoPedra) quadradoPedra.classList.add('escurecendo')
             if (quadradoPapel) quadradoPapel.classList.remove("escurecendo")
             if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendo')
+
+            resistenciaP1.innerHTML = ''
+            velocidadeP1.innerHTML = ''
+            letalidadeP1.innerHTML = ''
+
+            // Os atributos dos personagens foram definidos anteriormente, com 0
+            // para resistência, 1 para velocidade, e 2 para letalidade
+            // Aqui, fazemos um map nos atributos, em que a cada vez que 
+            // encontrar um numero, 0, 1, ou 2, vai adicionar estrelas
+            // indicando a proeficiência do personagem naquele aspecto
+
+            // Isso foi feito para que no caso de futuros balanceamentos, não seja preciso
+            // recriar todo o layout
+            pedraAtributos.map((valor) => {
+                if (valor === 0) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    resistenciaP1.appendChild(novaEstrela);
+                }
+            });
+            
+            pedraAtributos.map((valor) => {
+                if (valor === 1) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    velocidadeP1.appendChild(novaEstrela);
+                }
+            });
+            
+            pedraAtributos.map((valor) => {
+                if (valor === 2) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    letalidadeP1.appendChild(novaEstrela);
+                }
+            });
+
             break
 
         case "Papel": 
@@ -124,6 +177,34 @@ const render = (estado) => {
             if (quadradoPapel) quadradoPapel.classList.add('escurecendo')
             if (quadradoPedra) quadradoPedra.classList.remove('escurecendo')
             if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendo')
+
+            resistenciaP1.innerHTML = ''
+            velocidadeP1.innerHTML = ''
+            letalidadeP1.innerHTML = ''
+
+            papelAtributos.map((valor) => {
+                if (valor === 0) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    resistenciaP1.appendChild(novaEstrela);
+                }
+            });
+            
+            papelAtributos.map((valor) => {
+                if (valor === 1) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    velocidadeP1.appendChild(novaEstrela);
+                }
+            });
+            
+            papelAtributos.map((valor) => {
+                if (valor === 2) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    letalidadeP1.appendChild(novaEstrela);
+                }
+            });
             break
 
         case "Tesoura": 
@@ -132,6 +213,33 @@ const render = (estado) => {
             if (quadradoTesoura) quadradoTesoura.classList.add('escurecendo')
             if (quadradoPedra) quadradoPedra.classList.remove('escurecendo')
             if (quadradoPapel) quadradoPapel.classList.remove('escurecendo')
+            resistenciaP1.innerHTML = ''
+            velocidadeP1.innerHTML = ''
+            letalidadeP1.innerHTML = ''
+
+            tesouraAtributos.map((valor) => {
+                if (valor === 0) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    resistenciaP1.appendChild(novaEstrela);
+                }
+            });
+            
+            tesouraAtributos.map((valor) => {
+                if (valor === 1) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    velocidadeP1.appendChild(novaEstrela);
+                }
+            });
+            
+            tesouraAtributos.map((valor) => {
+                if (valor === 2) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaVermelha.png';
+                    letalidadeP1.appendChild(novaEstrela);
+                }
+            });
             break
     }
 
@@ -147,9 +255,42 @@ const render = (estado) => {
             if (quadradoPedra) quadradoPedra.classList.add('escurecendoP2')
             if (quadradoTesoura) quadradoTesoura.classList.remove("escurecendoP2")
             if (quadradoPapel) quadradoPapel.classList.remove('escurecendoP2')
+
+            resistenciaP2.innerHTML = ''
+            velocidadeP2.innerHTML = ''
+            letalidadeP2.innerHTML = ''
+
+            pedraAtributos.map((valor) => {
+                if (valor === 0) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    resistenciaP2.appendChild(novaEstrela);
+                }
+            });
+            
+            pedraAtributos.map((valor) => {
+                if (valor === 1) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    velocidadeP2.appendChild(novaEstrela);
+                }
+            });
+            
+            pedraAtributos.map((valor) => {
+                if (valor === 2) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    letalidadeP2.appendChild(novaEstrela);
+                }
+            });
             break
         case "Papel": 
             espacoPersonagem2.src = `./assets/images/personagens/Papel.png`
+
+            
+            resistenciaP2.innerHTML = ''
+            velocidadeP2.innerHTML = ''
+            letalidadeP2.innerHTML = ''
 
             if (quadradoPapel) quadradoPapel.classList.add('p2select')
             if (quadradoPedra) quadradoPedra.classList.remove('p2select')
@@ -158,9 +299,38 @@ const render = (estado) => {
             if (quadradoPapel) quadradoPapel.classList.add('escurecendoP2')
             if (quadradoPedra) quadradoPedra.classList.remove('escurecendoP2')
             if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendoP2')
+
+            papelAtributos.map((valor) => {
+                if (valor === 0) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    resistenciaP2.appendChild(novaEstrela);
+                }
+            });
+            
+            papelAtributos.map((valor) => {
+                if (valor === 1) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    velocidadeP2.appendChild(novaEstrela);
+                }
+            });
+            
+            papelAtributos.map((valor) => {
+                if (valor === 2) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    letalidadeP2.appendChild(novaEstrela);
+                }
+            });
             break
         case "Tesoura": 
             espacoPersonagem2.src = `./assets/images/personagens/Tesoura.png`
+
+            
+            resistenciaP2.innerHTML = ''
+            velocidadeP2.innerHTML = ''
+            letalidadeP2.innerHTML = ''
 
             if (quadradoTesoura) quadradoTesoura.classList.add('p2select')
             if (quadradoPedra) quadradoPedra.classList.remove('p2select')
@@ -169,6 +339,30 @@ const render = (estado) => {
             if (quadradoTesoura) quadradoTesoura.classList.add('escurecendoP2')
             if (quadradoPedra) quadradoPedra.classList.remove('escurecendoP2')
             if (quadradoPapel) quadradoPapel.classList.remove('escurecendoP2') 
+
+            tesouraAtributos.map((valor) => {
+                if (valor === 0) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    resistenciaP2.appendChild(novaEstrela);
+                }
+            });
+            
+            tesouraAtributos.map((valor) => {
+                if (valor === 1) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    velocidadeP2.appendChild(novaEstrela);
+                }
+            });
+            
+            tesouraAtributos.map((valor) => {
+                if (valor === 2) {
+                    const novaEstrela = document.createElement('img');
+                    novaEstrela.src = './assets/images/EstrelaAzul.png';
+                    letalidadeP2.appendChild(novaEstrela);
+                }
+            });
             break
     }
 
