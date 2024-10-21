@@ -421,7 +421,11 @@ const renderizarArena = () => {
     // Redireciona para a página arena.html, com os personagens escolhidos no formato de query params.
     const personagemJogador1 = estado.jogador1.personagens[estado.jogador1.indiceAtual]
     const personagemJogador2 = estado.jogador2.personagens[estado.jogador2.indiceAtual]
-        
+    
+    localStorage.setItem('personagemJogador1', personagemJogador1);
+    localStorage.setItem('personagemJogador2', personagemJogador2);
+    
     window.location.href = `arena.html?personagem1=${personagemJogador1}&personagem2=${personagemJogador2}`;
 }
+
 

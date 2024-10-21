@@ -3,6 +3,9 @@ const params = new URLSearchParams(window.location.search);
 const ganhador = params.get("ganhador");
 const perdedor = params.get("perdedor");
 
+const personagemJogador1 = localStorage.getItem('personagemJogador1');
+const personagemJogador2 = localStorage.getItem('personagemJogador2');
+
 const vitoriaDiv = document.querySelector(".vencedor");
 
 if (ganhador === "Papel") {
@@ -21,7 +24,7 @@ document.querySelector('.voltarTelaInicial').addEventListener('click', () => {
 
 document.querySelector('.revanche').addEventListener('click', () => {
     // Redireciona para arena.html com personagem1 como o ganhador e personagem2 como o perdedor
-    window.location.href = `arena.html?personagem1=${ganhador}&personagem2=${perdedor}`;
+    window.location.href = `arena.html?personagem1=${personagemJogador1}&personagem2=${personagemJogador2}`;
 });
 
 // Define a piadinha com base no ganhador e perdedor
