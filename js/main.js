@@ -411,8 +411,9 @@ const confirmaPlayer2 = () => {
 const verificaSeJogadoresEstaoProntos = () => {
     const botaoConfirmaP1 = document.querySelector('.left-confirm-character')
     const botaoConfirmaP2 = document.querySelector('.right-confirm-character')
+    const taNaSelecao = document.querySelector(".telainicial").classList.contains("hidden")
 
-    if(botaoConfirmaP1.innerText === 'Cancelar' && botaoConfirmaP2.innerText === 'Cancelar') renderizarArena()
+    if(botaoConfirmaP1.innerText === 'Cancelar' && botaoConfirmaP2.innerText === 'Cancelar' && taNaSelecao) renderizarArena()
 }
 
 const renderizarArena = () => {
