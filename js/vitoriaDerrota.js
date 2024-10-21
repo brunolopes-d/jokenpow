@@ -3,15 +3,25 @@ const params = new URLSearchParams(window.location.search);
 const ganhador = params.get("ganhador");
 const perdedor = params.get("perdedor");
 
-const personagemJogador1 = localStorage.getItem('personagemJogador1');
-const personagemJogador2 = localStorage.getItem('personagemJogador2');
+const personagemJogador1 = params.get("jogador1");
+const personagemJogador2 = params.get("jogador2");
+
+const playerGanhador = params.get("pg")
 
 const vitoriaDiv = document.querySelector(".vencedor");
 
-if (ganhador === "Papel") {
-    vitoriaDiv.innerHTML = `O ${ganhador} saiu vitorioso.`;
-} else if (ganhador === perdedor) {
-    vitoriaDiv.innerHTML = `A ${ganhador }`;
+if (ganhador !== perdedor) {
+    if (ganhador === "Papel") {
+        vitoriaDiv.innerHTML = `O ${ganhador} saiu vitorioso.`;
+    } else if (ganhador === "Pedra" || ganhador === "Tesoura") {
+        vitoriaDiv.innerHTML = `A ${ganhador} saiu vitoriosa.`;
+    }
+} else {
+    if (playerGanhador === 'p1') {
+        vitoriaDiv.innerHTML = `O jogador 1 venceu.`
+    } else {
+        vitoriaDiv.innerHTML = `O jogador 2 venceu.`
+    }    
 }
 
 
@@ -29,7 +39,7 @@ document.querySelector('.revanche').addEventListener('click', () => {
 
 // Define a piadinha com base no ganhador e perdedor
 if (ganhador === "Pedra" && perdedor === "Papel") {
-    piadinha.innerHTML = "_Pedra dura e papel mole...";
+    piadinha.innerHTML = "Pedra dura e papel mole...";
 } else if (ganhador === "Papel" && perdedor === "Tesoura") {
     piadinha.innerHTML = "Essa tesoura tá muito cega pelo visto.";
 } else if (ganhador === "Tesoura" && perdedor === "Pedra") {

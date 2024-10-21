@@ -5,6 +5,7 @@ html, body {
     padding: 0;
     overflow: hidden;
     height: 100%;
+    box-sizing: border-box
 }
 
 .telainicial {
@@ -23,7 +24,7 @@ html, body {
     height: 250px;
 }
 
-.botoes{
+.botoes {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -173,13 +174,31 @@ button.start-button:active, button.instrucoes:active {
     background-color:#d00000;
     padding: 50px;
     border-radius: 5%;
-    border: 0.2em solid rgb(138, 4, 4);
-    margin-bottom: 10px;
+    border: 0.2em solid rgb(255, 255, 255);
+    margin-bottom: 15px;
 }
 
-.square:hover{
-    cursor: pointer;
+.pedra {
+    background-image: url("/assets/images/personagens/selecao/Pedra.png");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
+
+.papel {
+    background-image: url("/assets/images/personagens/selecao/Papel.png");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.tesoura {
+    background-image: url("/assets/images/personagens/selecao/Tesoura.png");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
 
 .leftside, .rightside {
     display: flex;
@@ -302,21 +321,22 @@ button.start-button:active, button.instrucoes:active {
     }
   }
 
-  .escurecendo {
+  .bordaVermelha {
+    outline: 0.2em solid #7c0000;
+    outline-offset: 2px;
     animation: escurecer 1.5s infinite;
 }
 
-  .escurecendoP2 {
+.boardaAzul {
+    outline: 0.2em solid rgb(0, 79, 168);
+    outline-offset: 2px;
     animation: escurecer 1.5s infinite;
 }
 
-.escurecendoBoth {
-    background-color: rgb(112, 0, 163);
-    border: 0.3em solid rgb(59, 0, 87);
+.dualBorder {
+    border: 0.2em solid #d00000;
+    outline: 0.2em solid #004caf; 
+    outline-offset: 2px; 
     animation: escurecer 1.5s infinite;
 }
 
-.p2select {
-    background-color: #023e8a;
-    border: 0.3em solid rgb(0, 21, 80)
-}

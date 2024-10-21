@@ -477,14 +477,14 @@ const verificarVitoria = () => {
 
     if (barraDeVidaP1.style.width === `0%`) {
         setInterval(() => {
-            window.location.href = `vitoria.html?ganhador=${p2}&perdedor=${p1}`;
+            window.location.href = `vitoria.html?ganhador=${p2}&perdedor=${p1}&jogador1=${p1}&jogador2=${p2}&pg=p2`;
         }, 7000)
         htmlPersonagemP1.classList.add('morto')
     }
 
     if (barraDeVidaP2.style.width === `0%`) {
         setInterval(() => {
-            window.location.href = `vitoria.html?ganhador=${p1}&perdedor=${p2}`;
+            window.location.href = `vitoria.html?ganhador=${p1}&perdedor=${p2}&jogador1=${p1}&jogador2=${p2}&pg=p1`;
         }, 7000)
         htmlPersonagemP2.classList.add('morto')
     }

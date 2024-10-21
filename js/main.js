@@ -129,9 +129,9 @@ const render = (estado) => {
     switch(personagemJogador1) {
         case "Pedra":
             espacoPersonagem1.src = `./assets/images/personagens/Pedra.png`
-            if (quadradoPedra) quadradoPedra.classList.add('escurecendo')
-            if (quadradoPapel) quadradoPapel.classList.remove("escurecendo")
-            if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendo')
+            if (quadradoPedra) quadradoPedra.classList.add('bordaVermelha')
+            if (quadradoPapel) quadradoPapel.classList.remove("bordaVermelha")
+            if (quadradoTesoura) quadradoTesoura.classList.remove('bordaVermelha')
 
             resistenciaP1.innerHTML = ''
             velocidadeP1.innerHTML = ''
@@ -174,9 +174,9 @@ const render = (estado) => {
         case "Papel": 
             espacoPersonagem1.src = `./assets/images/personagens/Papel.png`
 
-            if (quadradoPapel) quadradoPapel.classList.add('escurecendo')
-            if (quadradoPedra) quadradoPedra.classList.remove('escurecendo')
-            if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendo')
+            if (quadradoPapel) quadradoPapel.classList.add('bordaVermelha')
+            if (quadradoPedra) quadradoPedra.classList.remove('bordaVermelha')
+            if (quadradoTesoura) quadradoTesoura.classList.remove('bordaVermelha')
 
             resistenciaP1.innerHTML = ''
             velocidadeP1.innerHTML = ''
@@ -210,9 +210,9 @@ const render = (estado) => {
         case "Tesoura": 
             espacoPersonagem1.src = `./assets/images/personagens/Tesoura.png`
 
-            if (quadradoTesoura) quadradoTesoura.classList.add('escurecendo')
-            if (quadradoPedra) quadradoPedra.classList.remove('escurecendo')
-            if (quadradoPapel) quadradoPapel.classList.remove('escurecendo')
+            if (quadradoTesoura) quadradoTesoura.classList.add('bordaVermelha')
+            if (quadradoPedra) quadradoPedra.classList.remove('bordaVermelha')
+            if (quadradoPapel) quadradoPapel.classList.remove('bordaVermelha')
             resistenciaP1.innerHTML = ''
             velocidadeP1.innerHTML = ''
             letalidadeP1.innerHTML = ''
@@ -248,13 +248,9 @@ const render = (estado) => {
         case "Pedra":
             espacoPersonagem2.src = `./assets/images/personagens/Pedra.png`
 
-            if (quadradoPedra) quadradoPedra.classList.add('p2select')
-            if (quadradoTesoura) quadradoTesoura.classList.remove("p2select")
-            if (quadradoPapel) quadradoPapel.classList.remove('p2select')
-
-            if (quadradoPedra) quadradoPedra.classList.add('escurecendoP2')
-            if (quadradoTesoura) quadradoTesoura.classList.remove("escurecendoP2")
-            if (quadradoPapel) quadradoPapel.classList.remove('escurecendoP2')
+            if (quadradoPedra) quadradoPedra.classList.add('boardaAzul')
+            if (quadradoTesoura) quadradoTesoura.classList.remove("boardaAzul")
+            if (quadradoPapel) quadradoPapel.classList.remove('boardaAzul')
 
             resistenciaP2.innerHTML = ''
             velocidadeP2.innerHTML = ''
@@ -292,13 +288,9 @@ const render = (estado) => {
             velocidadeP2.innerHTML = ''
             letalidadeP2.innerHTML = ''
 
-            if (quadradoPapel) quadradoPapel.classList.add('p2select')
-            if (quadradoPedra) quadradoPedra.classList.remove('p2select')
-            if (quadradoTesoura) quadradoTesoura.classList.remove('p2select')
-
-            if (quadradoPapel) quadradoPapel.classList.add('escurecendoP2')
-            if (quadradoPedra) quadradoPedra.classList.remove('escurecendoP2')
-            if (quadradoTesoura) quadradoTesoura.classList.remove('escurecendoP2')
+            if (quadradoPapel) quadradoPapel.classList.add('boardaAzul')
+            if (quadradoPedra) quadradoPedra.classList.remove('boardaAzul')
+            if (quadradoTesoura) quadradoTesoura.classList.remove('boardaAzul')
 
             papelAtributos.map((valor) => {
                 if (valor === 0) {
@@ -332,13 +324,9 @@ const render = (estado) => {
             velocidadeP2.innerHTML = ''
             letalidadeP2.innerHTML = ''
 
-            if (quadradoTesoura) quadradoTesoura.classList.add('p2select')
-            if (quadradoPedra) quadradoPedra.classList.remove('p2select')
-            if (quadradoPapel) quadradoPapel.classList.remove('p2select')
-
-            if (quadradoTesoura) quadradoTesoura.classList.add('escurecendoP2')
-            if (quadradoPedra) quadradoPedra.classList.remove('escurecendoP2')
-            if (quadradoPapel) quadradoPapel.classList.remove('escurecendoP2') 
+            if (quadradoTesoura) quadradoTesoura.classList.add('boardaAzul')
+            if (quadradoPedra) quadradoPedra.classList.remove('boardaAzul')
+            if (quadradoPapel) quadradoPapel.classList.remove('boardaAzul')
 
             tesouraAtributos.map((valor) => {
                 if (valor === 0) {
@@ -371,22 +359,22 @@ const render = (estado) => {
 
     if (estado.jogador1.indiceAtual === estado.jogador2.indiceAtual) {
         if (personagemJogador1 === "Pedra") {
-            quadradoPedra.classList.add('escurecendoBoth')
-            quadradoPedra.classList.remove('escurecendo')
-            quadradoPedra.classList.remove('p2select')
+            quadradoPedra.classList.add('dualBorder')
+            quadradoPedra.classList.remove('bordaVermelha')
+            quadradoPedra.classList.remove('bordaAzul')
         } else if (personagemJogador1 === "Papel") {
-            quadradoPapel.classList.add('escurecendoBoth')
-            quadradoPapel.classList.remove('escurecendo')
-            quadradoPapel.classList.remove('p2select')
+            quadradoPapel.classList.add('dualBorder')
+            quadradoPapel.classList.remove('bordaVermelha')
+            quadradoPapel.classList.remove('bordaAzul')
         } else if (personagemJogador1 === "Tesoura") {
-            quadradoTesoura.classList.add('escurecendoBoth')
-            quadradoTesoura.classList.remove('escurecendo')
-            quadradoTesoura.classList.remove('p2select')
+            quadradoTesoura.classList.add('dualBorder')
+            quadradoTesoura.classList.remove('bordaVermelha')
+            quadradoTesoura.classList.remove('bordaAzul')
         }
     } else {
-        quadradoPedra.classList.remove('escurecendoBoth')
-        quadradoPapel.classList.remove('escurecendoBoth')
-        quadradoTesoura.classList.remove('escurecendoBoth')
+        quadradoPedra.classList.remove('dualBorder')
+        quadradoPapel.classList.remove('dualBorder')
+        quadradoTesoura.classList.remove('dualBorder')
     }
 }
 
