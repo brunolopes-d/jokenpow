@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 html, body {
+    position: relative;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -56,4 +57,33 @@ button.botao:active {
     transform: translateY(3px);  
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
+
+.textoAviso {
+    position: absolute;
+    bottom: 20%;
+    left: 43%;
+    font-size: 1.2em;
+    font-family: "Pixelify Sans";
+    color: white;
+}
+
+@keyframes vaievem {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animacao-vaievem {
+    animation: vaievem 2s infinite ease-in-out;
+}
+
+
 

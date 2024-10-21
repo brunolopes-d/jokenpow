@@ -346,9 +346,9 @@ const atacar = (estado, jogador) => {
             const dano = estado[jogador].personagem === "Pedra" ? 15 : estado[jogador].personagem === "Papel" ? 10 : 20;
 
             if (oponente === "player1") {
-                deixarVermelhoMomentaneamente(htmlPersonagemP1)
+                deixarVermelhoMomentaneamenteP1(imgPersonagem1)
             } else {
-                deixarVermelhoMomentaneamente(htmlPersonagemP2)
+                deixarVermelhoMomentaneamenteP2(imgPersonagem2)
             }
 
             if (estado[jogador].personagem === "Pedra") {
@@ -377,16 +377,29 @@ const atacar = (estado, jogador) => {
     return estado; // Retorna o estado sem alterações se o ataque não foi bem-sucedido
 };
 
-const deixarVermelhoMomentaneamente = (personagem) => {
-    // Adiciona a classe 'flash' ao personagem
-    personagem.classList.add('flash');
 
-    // Remove a classe 'flash' após a animação
+// Deixa o jogador 1 vermelho momentaneamente pra sinalizar que ele tomou dano
+const deixarVermelhoMomentaneamenteP1 = (personagem) => {
+    // Aqui trocamos o endereço da imagem para outro endereço, em que tem um sprite do dado personagem tomando dano (vermelho)
+    personagem.setAttribute('src', `assets/images/personagens/dano/${p1}.png`);
     setTimeout(() => {
-        personagem.classList.remove('flash');
-    }, 500); // Duração da animação
+        // Depois de meio segundo, voltamos ele pro sprite original
+        personagem.setAttribute('src', `assets/images/personagens/${p1}.png`);
+    }, 500); 
 }
 
+// Deixa o jogador 2 vermelho momentaneamente pra sinalizar que ele tomou dano
+const deixarVermelhoMomentaneamenteP2 = (personagem) => {
+    // Aqui trocamos o endereço da imagem para outro endereço, em que tem um sprite do dado personagem tomando dano (vermelho)
+    personagem.setAttribute('src', `assets/images/personagens/dano/${p2}.png`);
+    setTimeout(() => {
+        // Depois de meio segundo, voltamos ele pro sprite original
+        personagem.setAttribute('src', `assets/images/personagens/${p2}.png`);
+    }, 500); 
+}
+
+
+// Função responsável por atualizar a barra de vida dos personagens depois que alguma ação de ataque for realizada
 const atualizarBarraHP = () => {
     const barraDeVidaP1 = document.querySelector(".player1-health");
     const barraDeVidaP2 = document.querySelector(".player2-health");
@@ -460,6 +473,8 @@ const handleKeyUp =  (e) => {
             vx: 0
         }}
     }
+
+    // As ações de aque só vão ser realizadas após ser detectado um keyUp 
 
     if (e.key === "Shift") {
         estado = atacar(estado, "player1")

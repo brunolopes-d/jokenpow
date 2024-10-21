@@ -9,6 +9,8 @@ const personagemJogador2 = params.get("jogador2");
 const playerGanhador = params.get("pg")
 
 const vitoriaDiv = document.querySelector(".vencedor");
+const vitoriaSound = new Audio('./assets/audios/vitoria.mp3');
+vitoriaSound.play()
 
 if (ganhador !== perdedor) {
     if (ganhador === "Papel") {
