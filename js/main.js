@@ -7,8 +7,8 @@ const audio = document.querySelector("#audio")
 
 // Definição dos atributos dos personagens
 const pedraAtributos = [0, 0, 0, 0, 0, 1, 1, 2, 2, 2]
-const papelAtributos = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2]
-const tesouraAtributos = [0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
+const papelAtributos = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2]
+const tesouraAtributos = [0, 0, 0, 1, 1, 1, 2, 2, 2]
 
 const estrelaVermelha = document.createElement('img').setAttribute('src', `/assets/images/EstrelaVermelha.png`)
 const estrelaAzul = document.createElement('img').setAttribute('src', `/assets/images/EstrelaAzul.png`)

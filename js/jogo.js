@@ -38,7 +38,7 @@ const estadoInicial = (personagem1, personagem2) => {
     return {
         player1: {
             personagem: personagem1,
-            vida: personagem1 === "Pedra" ? 175 : personagem1 == "Papel" ? 125 : personagem1 == "Tesoura" ? 150 : "Erro",
+            vida: personagem1 === "Pedra" ? 200 : personagem1 == "Papel" ? 125 : personagem1 == "Tesoura" ? 175 : "Erro",
             // Operador Ternário para decidir qual a vida do personagem baseado no personagem escolhido ^
             x: -600, // Posição inicial no eixo x na arena
             y: 125, // Posição inicial no eixo y na arena (acima do chão)
@@ -50,7 +50,7 @@ const estadoInicial = (personagem1, personagem2) => {
 
         player2: {
             personagem: personagem2,
-            vida: personagem2 === "Pedra" ? 200 : personagem2 == "Papel" ? 100 : personagem2 == "Tesoura" ? 150 : "Erro",
+            vida: personagem2 === "Pedra" ? 200 : personagem2 == "Papel" ? 125 : personagem2 == "Tesoura" ? 175 : "Erro",
             // Operador Ternário para decidir qual a vida do personagem baseado no personagem escolhido ^
             x: 600, // Posição inicial no eixo x na arena
             y: 125, // Posição inicial no eixo y na arena (acima do chão)
@@ -345,6 +345,9 @@ const aplicarGravidade = (estado, jogador) => {
 const atacar = (estado, jogador) => {
     const direcao = estado[jogador].direcao; // Aqui identificamos a direção que o personagem está olhando para realizar o ataque
     const oponente = jogador === "player1" ? "player2" : "player1"; // Identificamos quem é o oponente que sofrerá o ataque
+
+    // Detecta a direção que o oponente está olhando na hora do ataque, vai ser importante para definir o sprite tomando dano 
+    const oponenteDirecao = estado[oponente].direcao
     const distanciaDeAtaque = 200; // Definimos a distância do ataque básico
 
     // Aqui, há uma verificação se o oponente está na direção do ataque, se ele estiver na 
@@ -360,12 +363,12 @@ const atacar = (estado, jogador) => {
             // Caso seja, o ataque será bem-sucedido, e o oponente sofrerá dano
 
             // Definimos o dano base de cada ataque dependendo do personagem escolhido
-            const dano = estado[jogador].personagem === "Pedra" ? 15 : estado[jogador].personagem === "Papel" ? 10 : 20;
+            const dano = estado[jogador].personagem === "Pedra" ? 10 : estado[jogador].personagem === "Papel" ? 20 : 15;
 
             if (oponente === "player1") {
-                deixarVermelhoMomentaneamenteP1(imgPersonagem1)
+                deixarVermelhoMomentaneamenteP1(imgPersonagem1, oponenteDirecao)
             } else {
-                deixarVermelhoMomentaneamenteP2(imgPersonagem2)
+                deixarVermelhoMomentaneamenteP2(imgPersonagem2, oponenteDirecao)
             }
 
             if (estado[jogador].personagem === "Pedra") {
@@ -378,7 +381,6 @@ const atacar = (estado, jogador) => {
 
             // Chama a função atualizar a barra HP para atualizar o dano sofrido
             atualizarBarraHP()
-
 
             // Retorna um novo estado, com a sua vida alterada
             return {
@@ -396,23 +398,41 @@ const atacar = (estado, jogador) => {
 
 
 // Deixa o jogador 1 vermelho momentaneamente pra sinalizar que ele tomou dano
-const deixarVermelhoMomentaneamenteP1 = (personagem) => {
+const deixarVermelhoMomentaneamenteP1 = (personagem, direcao) => {
     // Aqui trocamos o endereço da imagem para outro endereço, em que tem um sprite do dado personagem tomando dano (vermelho)
-    personagem.style.backgroundImage = `url('assets/images/personagens/dano/${p1}.png')`;
-    setTimeout(() => {
-        // Depois de meio segundo, voltamos ele pro sprite original
-        personagem.style.backgroundImage = `url('assets/images/personagens/${p1}.png')`;
-    }, 500); 
+
+    // Aqui, usamos a direção do oponente para verificar qual sprite deve ser renderizado, o dele olhando para direita ou olhando para esquerda
+    if (direcao === "direita") {
+        personagem.style.backgroundImage = `url('assets/images/personagens/dano/viradoParaDireita/${p1}.png')`;
+        setTimeout(() => {
+            // Depois de meio segundo, voltamos ele pro sprite original, olhando para a dada direção
+            personagem.style.backgroundImage = `url('assets/images/personagens/olhandoDireita/${p1}.png')`;
+        }, 500); 
+    } else {
+        personagem.style.backgroundImage = `url('assets/images/personagens/dano/viradoParaEsquerda/${p1}.png')`;
+        setTimeout(() => {
+            // Depois de meio segundo, voltamos ele pro sprite original, olhando para a dada direção
+            personagem.style.backgroundImage = `url('assets/images/personagens/olhandoEsquerda/${p1}.png')`;
+        }, 500);  
+    }
 }
 
 // Deixa o jogador 2 vermelho momentaneamente pra sinalizar que ele tomou dano
-const deixarVermelhoMomentaneamenteP2 = (personagem) => {
+const deixarVermelhoMomentaneamenteP2 = (personagem, direcao) => {
     // Aqui trocamos o endereço da imagem para outro endereço, em que tem um sprite do dado personagem tomando dano (vermelho)
-    personagem.style.backgroundImage = `url('assets/images/personagens/dano/${p2}.png')`;
-    setTimeout(() => {
-        // Depois de meio segundo, voltamos ele pro sprite original
-        personagem.style.backgroundImage = `url('assets/images/personagens/${p2}.png')`;
-    }, 500); 
+    if (direcao === "direita") {
+        personagem.style.backgroundImage = `url('assets/images/personagens/dano/viradoParaDireita/${p2}.png')`;
+        setTimeout(() => {
+            // Depois de meio segundo, voltamos ele pro sprite original
+            personagem.style.backgroundImage = `url('assets/images/personagens/olhandoDireita/${p2}.png')`;
+        }, 500); 
+    } else {
+        personagem.style.backgroundImage = `url('assets/images/personagens/dano/viradoParaEsquerda/${p2}.png')`;
+        setTimeout(() => {
+            // Depois de meio segundo, voltamos ele pro sprite original
+            personagem.style.backgroundImage = `url('assets/images/personagens/olhandoEsquerda/${p2}.png')`;
+        }, 500);  
+    }
 }
 
 
