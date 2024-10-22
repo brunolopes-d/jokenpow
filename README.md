@@ -26,11 +26,12 @@ Importante perceber que o jogo não é estritamente funcional, visto o uso de um
 
 Com esse encapsulamento da mutabilidade a uma única variável, é possível de certa forma prever como o estado será mudado ao ser encaminhado para funções puras que o manipulem, assim, é facilitado perceber como o estado do jogo muda com o tempo, e esse é o motivo de sua acepção dentro do paradigma funcional.
 
-Matérias sobre o uso de estados (caso calouros futuros venham a precisar):
+Materiais sobre o uso de estados (caso calouros futuros venham a precisar):
 
 https://gamedev.stackexchange.com/questions/74015/pure-functional-programming-and-game-state
 https://www.quora.com/Is-functional-programming-suitable-for-game-development
 https://prog21.dadgum.com/23.html
+https://hendrikdcomp.github.io/pf/conteudo/estudocaso/ec_snake.html
 
 
 Jogo desenvolvido por:
