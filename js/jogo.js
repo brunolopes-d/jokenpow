@@ -58,7 +58,7 @@ const estadoInicial = (personagem1, personagem2) => {
             vy: 0, // Velocidade no eixo y (Atrelado a mecânica de pular)
             direcao: 'esquerda', // Personagem que está a direita, inicialmente começa olhando para a esquerda
             pulando: false, // Usado para verificar se o jogador 2 não já está pulando
-    }
+        }
     }
 }
 
@@ -497,7 +497,7 @@ const handleKeyUp =  (e) => {
         estado = atacar(estado, "player1")
     }
 
-    if (e.key === "Control" && e.location === 2) {
+    if (e.key === "0") {
         estado = atacar(estado, "player2")
     }
 
