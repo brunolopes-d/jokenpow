@@ -20,8 +20,8 @@ nomeP1.innerText = p1;
 nomeP2.innerText = p2;
 
 // Mudar o src das imagens para os personagens escolhidos
-imgPersonagem1.setAttribute('src', `assets/images/personagens/${p1}.png`);
-imgPersonagem2.setAttribute('src', `assets/images/personagens/${p2}.png`);
+imgPersonagem1.style.backgroundImage = `url('assets/images/personagens/${p1}.png')`;
+imgPersonagem2.style.backgroundImage = `url('assets/images/personagens/${p2}.png')`;
 
 const chao = document.querySelector('.chao')
 
@@ -118,6 +118,7 @@ setTimeout( () => {
     temporizador.innerText = ''
 }, 4500)
 
+// Define a vida máxima dos jogadores, isso posteriormente vai ser utilizado pro cálculo da barra de vida
 const vidaMaximaP1 = estado.player1.vida
 const vidaMaximaP2 = estado.player2.vida
 
@@ -135,6 +136,22 @@ const mover = (estado, jogador, direcao) => {
     const velocidade = estado[jogador].personagem === "Pedra" ? 5 : estado[jogador].personagem === "Papel" ? 10 : 7.5
     const novaVelocidade = direcao === 'esquerda' ? -velocidade : velocidade;
 
+
+    // Lógica de mudança de sprite dependendo da direção que o usuário tá olhando
+    if (jogador === "player1") {
+        if (direcao === 'direita') {
+            imgPersonagem1.style.backgroundImage = `url('assets/images/personagens/olhandoDireita/${p1}.png')`;
+        } else {
+            imgPersonagem1.style.backgroundImage = `url('assets/images/personagens/olhandoEsquerda/${p1}.png')`;
+        }
+    } else {
+        if (direcao === 'direita') {
+            imgPersonagem2.style.backgroundImage = `url('assets/images/personagens/olhandoDireita/${p2}.png')`;
+        } else {
+            imgPersonagem2.style.backgroundImage = `url('assets/images/personagens/olhandoEsquerda/${p2}.png')`;
+        }
+    }
+
     return {
         ...estado, 
         [jogador]: { // Importante destacar aqui que fazemos uso Computed Property Keys, basicamente nos permite acessar de maneira dinâmica propriedades dentro de um registro
@@ -150,7 +167,6 @@ const mover = (estado, jogador, direcao) => {
 
 const atualizaPos = (estado, jogador) => {
     const novoX = estado[jogador].x + estado[jogador].vx;
-    
     const novoEstado = {
         ...estado,
         [jogador]: {
@@ -382,20 +398,20 @@ const atacar = (estado, jogador) => {
 // Deixa o jogador 1 vermelho momentaneamente pra sinalizar que ele tomou dano
 const deixarVermelhoMomentaneamenteP1 = (personagem) => {
     // Aqui trocamos o endereço da imagem para outro endereço, em que tem um sprite do dado personagem tomando dano (vermelho)
-    personagem.setAttribute('src', `assets/images/personagens/dano/${p1}.png`);
+    personagem.style.backgroundImage = `url('assets/images/personagens/dano/${p1}.png')`;
     setTimeout(() => {
         // Depois de meio segundo, voltamos ele pro sprite original
-        personagem.setAttribute('src', `assets/images/personagens/${p1}.png`);
+        personagem.style.backgroundImage = `url('assets/images/personagens/${p1}.png')`;
     }, 500); 
 }
 
 // Deixa o jogador 2 vermelho momentaneamente pra sinalizar que ele tomou dano
 const deixarVermelhoMomentaneamenteP2 = (personagem) => {
     // Aqui trocamos o endereço da imagem para outro endereço, em que tem um sprite do dado personagem tomando dano (vermelho)
-    personagem.setAttribute('src', `assets/images/personagens/dano/${p2}.png`);
+    personagem.style.backgroundImage = `url('assets/images/personagens/dano/${p2}.png')`;
     setTimeout(() => {
         // Depois de meio segundo, voltamos ele pro sprite original
-        personagem.setAttribute('src', `assets/images/personagens/${p2}.png`);
+        personagem.style.backgroundImage = `url('assets/images/personagens/${p2}.png')`;
     }, 500); 
 }
 
