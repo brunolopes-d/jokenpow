@@ -491,17 +491,16 @@ const handleKeyUp =  (e) => {
         }}
     }
 
-    // As ações de aque só vão ser realizadas após ser detectado um keyUp 
+ // As ações de aque só vão ser realizadas após ser detectado um keyUp,além disso os personagens
+ // só podem atacar casoo tenham uma vida > 0(antes mesmo morto os personagens batiam mesmo mortos)
 
-    if (e.key === " ") {
-        estado = atacar(estado, "player1")
+     if (e.key === "" && estado.player1.vida > 0) {
+        estado = atacar(estado, "player1");
     }
-
-    if (e.key === "0") {
-        estado = atacar(estado, "player2")
+    if (e.key === "0" && estado.player2.vida > 0) {
+        estado = atacar(estado, "player2");
     }
-
-}
+};
 
 const verificarVitoria = () => {
     const barraDeVidaP1 = document.querySelector(".player1-health")
