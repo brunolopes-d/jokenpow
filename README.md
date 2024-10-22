@@ -24,7 +24,7 @@ Tesoura:
 
 Importante perceber que o jogo não é estritamente funcional, visto o uso de uma variável de estado, no entanto, essa variável é atualizada de maneira controlada, sempre retornando um novo estado de jogo que será posteriormente renderizado na tela, mantendo a estrutura base do jogo imutável (estadoInicial) e fazendo posteriores atribuições ao estado do jogo no requestAnimationFrame (que fica responsável por redesenhar os quadros dependendo da frequência de hz do seu monitor). A prática do uso de estados é comum dentro da programação funcional, sendo seu uso com uma única variável de estado uma exceção dentro do paradigma, usando uma espécie de "imutabilidade controlada", permitindo o controle de quando e como o estado vai ser atualizado, minimizando assim a chance de ocorrerem efeitos colaterais indesejados. 
 
-Com esse encapsulamento da mutabilidade a uma única variável, é possível de certa forma prever como o estado será mudado ao ser encaminhado para funções puras que o manipulem, assim, é facilitado perceber como o estado do jogo muda com o tempo, e esse é o motivo de sua acepção dentro do paradigma funcional.
+Com esse encapsulamento da mutabilidade a uma única variável, é possível de certa forma prever como o estado será mudado ao ser encaminhado para funções puras que o manipulem, assim, é facilitado perceber como o estado do jogo muda com o tempo.
 
 Materiais sobre o uso de estados (caso calouros futuros venham a precisar):
 
