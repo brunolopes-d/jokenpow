@@ -39,7 +39,7 @@ Bruno Lopes dos Santos (@bruno.lopeess)
 Luis Fabiano Carvalho Leite (@luisfabianocl)
 Jefferson Gonzaga dos Santos Filho  (@je.ferson2368)
 
-Artes por: @aaaarthu
+Artes por: @aaaaarthu
 
 (Qualquer dúvida, podem mandar mensagem para qualquer um dos membros e vamos ter prazer em ajudar.)
 
