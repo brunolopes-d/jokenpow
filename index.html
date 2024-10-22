@@ -1,106 +1,121 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jokenpow</title>
     <link rel="stylesheet" href="/styles/main.css">
 </head>
-<body>
-    <div class="telainicial">
-        <img src="/assets/images/JokenPOW logo.png" alt="Jokenpow">
-        <div class="botoes">
-            <button class="start-button"> Jogar </button>
-            <button class="instrucoes"> Instruções </button>
-        </div>
-        <dialog class="instrucoes-modal">
-            <div class="modal-container">
-                <h1> Como jogar? </h1>
-                <p>
-                    Jokenpow é um jogo de luta, sabe aquele momento que você precisa
-                    resolver um dilema de maneira imparcial e resolve decidir no 
-                    Pedra, Papel, Tesoura? Aqui funciona do mesmo jeito, mas,
-                    não dependemos da sorte, vence aquele que melhor usa a sua escolha.
-                </p>
-                <p> O jogador 1 se movimenta usando o WASD, enquanto jogador 2 usa as IJKL.  </p>
-                <p> Botão de ataque do jogador 1: Shift (Esquerdo) </p>
-                <p> Botão de ataque do jogador 2: Ponto e Vírgula (;) </p>  
-                <p> Boa luta! </p> 
-                <button class="fechar-modal">X</button>
-            </div>
-        </dialog>
-        <div class="sprites">
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-            <div class="sprite"></div>
-        </div>
-        <audio id='audio' src="/assets/music/Under Fire.mp3" autoplay loop></audio>
-        <button class="botaoMusica ativarMusica"> <i class="fa-solid fa-volume-high"></i> </button>
-        <button class="botaoMusica desativarMusica"> <i class="fa-solid fa-volume-xmark"></i> </button>
-    </div>
 
-    <div class="selecaopersonagens">
-        <div class="leftside screen">
-            <div class="player-label p1">
-                Jogador 1
+    <body class="game-container">
+        <div class="telainicial">
+            <img src="/assets/images/JokenPOW logo.png" alt="Jokenpow">
+            <div class="botoes">
+                <button class="start-button"> Jogar </button>
+                <button class="instrucoes"> Instruções </button>
             </div>
-            <div class="character">
-                <div class="characterselected">
-                    <img class="personagem1" alt="">
-                    <div class="atributos"> 
-                        <div class="atributo"><span> Resistência: </span> <div class="resistenciaP1"></div></div> 
-                        <div class="atributo"><span> Velocidade: </span> <div class="velocidadeP1"></div></div> 
-                        <div class="atributo"><span> Letalidade: </span> <div class="letalidadeP1"></div></div> 
+            <dialog class="instrucoes-modal">
+                <div class="modal-container">
+                    <h1> Como jogar? </h1>
+                    <p>
+                        Jokenpow é um jogo de luta, sabe aquele momento que você precisa
+                        resolver um dilema de maneira imparcial e resolve decidir no
+                        Pedra, Papel, Tesoura? Aqui funciona do mesmo jeito, mas,
+                        não dependemos da sorte, vence aquele que melhor usa a sua escolha.
+                    </p>
+                    <p> O jogador 1 se movimenta usando o WASD, enquanto jogador 2 usa as setinhas. </p>
+                    <p> Botão de ataque do jogador 1: Barra de espaço </p>
+                    <p> Botão de ataque do jogador 2: Control direito (ctrl) </p>
+                    <p> Boa luta! </p>
+                    <button class="fechar-modal">X</button>
+                </div>
+            </dialog>
+            <div class="sprites">
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+                <div class="sprite"></div>
+            </div>
+            <audio id='audio' src="/assets/music/Under Fire.mp3" autoplay loop></audio>
+            <button class="botaoMusica ativarMusica"> <i class="fa-solid fa-volume-high"></i> </button>
+            <button class="botaoMusica desativarMusica"> <i class="fa-solid fa-volume-xmark"></i> </button>
+        </div>
+
+        <div class="selecaopersonagens">
+            <div class="leftside screen">
+                <div class="player-label p1">
+                    Jogador 1
+                </div>
+                <div class="character">
+                    <div class="characterselected">
+                        <img class="personagem1" alt="">
+                        <div class="atributos">
+                            <div class="atributo"><span> Resistência: </span>
+                                <div class="resistenciaP1"></div>
+                            </div>
+                            <div class="atributo"><span> Velocidade: </span>
+                                <div class="velocidadeP1"></div>
+                            </div>
+                            <div class="atributo"><span> Letalidade: </span>
+                                <div class="letalidadeP1"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="button-wrapper">
+                    <button class="left-confirm-character">Pronto</button>
+                    <p class="animacao-vaievem">pressione Espaço para confirmar</p>
+                </div>
             </div>
-            <div class="button-wrapper">
-                <button class="left-confirm-character">Pronto</button>
-                <p class="animacao-vaievem">pressione Espaço para confirmar</p>
-            </div>
-        </div>
-        <div class="middle">
-            <div class="selecionar-personagens-label">
-                SELEÇÃO DE PERSONAGENS 
-            </div>
+            <div class="middle">
+                <div class="selecionar-personagens-label">
+                    SELEÇÃO DE PERSONAGENS
+                </div>
                 <div class="choosecharacter">
                     <div class="square pedra"> </div>
                     <div class="square papel"> </div>
                     <div class="square tesoura"> </div>
                 </div>
                 <div class="atributos"> </div>
-        </div>
-        <div class="rightside screen">
-            <div class="player-label p2">
-                Jogador 2
             </div>
-            <div class="character">
-                <div class="characterselected">
-                    <img class="personagem2" alt="">
-                    <div class="atributos"> 
-                        <div class="atributo"><span> Resistência: </span> <div class="resistenciaP2"></div></div> 
-                        <div class="atributo"><span> Velocidade: </span> <div class="velocidadeP2"></div></div> 
-                        <div class="atributo"><span> Letalidade: </span> <div class="letalidadeP2"></div></div> 
+            <div class="rightside screen">
+                <div class="player-label p2">
+                    Jogador 2
+                </div>
+                <div class="character">
+                    <div class="characterselected">
+                        <img class="personagem2" alt="">
+                        <div class="atributos">
+                            <div class="atributo"><span> Resistência: </span>
+                                <div class="resistenciaP2"></div>
+                            </div>
+                            <div class="atributo"><span> Velocidade: </span>
+                                <div class="velocidadeP2"></div>
+                            </div>
+                            <div class="atributo"><span> Letalidade: </span>
+                                <div class="letalidadeP2"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="button-wrapper">
-                <button class="right-confirm-character">Pronto</button>
-                <p class="animacao-vaievem">pressione Enter para confirmar</p>
+                <div class="button-wrapper">
+                    <button class="right-confirm-character">Pronto</button>
+                    <p class="animacao-vaievem">pressione Enter para confirmar</p>
+                </div>
             </div>
         </div>
-    </div>
-</body>
-<script  src="js/main.js" type="module"></script>
+    </body>
+<script src="js/main.js" type="module"></script>
 <script src="https://kit.fontawesome.com/5529928a78.js" crossorigin="anonymous"></script>
+
 </html>

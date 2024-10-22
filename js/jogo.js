@@ -252,8 +252,8 @@ const verificaColisao = (player1, player2) => {
 };
 
 const limitaPosicao = (x) => {
-    const limiteEsquerda = -850 // Limite para a borda da esquerda da arena
-    const limiteDireita = 850 // Limite para a borda da direita da arena
+    const limiteEsquerda = -632.5 // Limite para a borda da esquerda da arena
+    const limiteDireita = 632.5 // Limite para a borda da direita da arena
     return Math.max(limiteEsquerda, Math.min(x, limiteDireita)); 
     // Aqui o limitaPosicao usa max e o min da própria engine do js, pra definir os valores posição do x,
     // impedindo ele de passar do -850, travando ele por conta do max, e travando ele de passar para 
@@ -454,15 +454,15 @@ const handleKeyDown =  (e) => {
 
     // Comandos para o player 2
 
-    if (e.key === "j") {
+    if (e.key === "ArrowLeft") {
         estado = mover(estado, "player2", "esquerda")
     }
 
-    if (e.key === "l") {
+    if (e.key === "ArrowRight") {
         estado = mover(estado, "player2", "direita")
     }
 
-    if (e.key === "i") {
+    if (e.key === "ArrowUp") {
         estado = pular(estado, "player2")
     }
 
@@ -484,7 +484,7 @@ const handleKeyUp =  (e) => {
         }}
     }
 
-    if (e.key === "j" || e.key === "l") {
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         estado = {...estado, player2: {
             ...estado.player2,
             vx: 0
@@ -493,11 +493,11 @@ const handleKeyUp =  (e) => {
 
     // As ações de aque só vão ser realizadas após ser detectado um keyUp 
 
-    if (e.key === "Shift") {
+    if (e.key === " ") {
         estado = atacar(estado, "player1")
     }
 
-    if (e.key === ";") {
+    if (e.key === "Control" && e.location === 2) {
         estado = atacar(estado, "player2")
     }
 
