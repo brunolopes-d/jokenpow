@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/arena.css">
     <title>Arena de Batalha</title>
 </head>
-<body> 
-    <section class="arena">
-        <!-- Barras de vida e temporizador -->
-        <section class="health-bars">
-            <div class="player-container player1-container">
-                <div class="personagemNomeP1">Pedra</div>
-                <div class="health-bar player1-bar">
-                    <div class="health player1-health"></div>
-                </div>
-            </div>
-              <!-- TEMPORIZADOR -->
-            <p class="temporizador">3</p>
-            <audio class="audio" src="assets/audios/audio-timer.wav" autoplay></audio>
 
-            <div class="player-container player2-container">
-                <div class="personagemNomeP2">Pedra</div>
-                <div class="health-bar player2-bar">
-                    <div class="health player2-health"></div>
+<div class="game-container">
+    <body>
+        
+        <section class="arena">
+            <!-- Barras de vida e temporizador -->
+            <section class="health-bars">
+                <div class="player-container player1-container">
+                    <div class="personagemNomeP1">Pedra</div>
+                    <div class="health-bar player1-bar">
+                        <div class="health player1-health"></div>
+                    </div>
                 </div>
+                <!-- TEMPORIZADOR -->
+                <p class="temporizador">3</p>
+                <audio class="audio" src="assets/audios/audio-timer.wav" autoplay></audio>
+
+                <div class="player-container player2-container">
+                    <div class="personagemNomeP2">Pedra</div>
+                    <div class="health-bar player2-bar">
+                        <div class="health player2-health"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="left-platform"></section>
+            <section class="right-platform"></section>
+            <div class="personagemContainerP1">
+                <div class="seta" id="setavermelha"><img src="/assets/images/SetaVermelha.png" class="piscando"></div>
+                <img src="assets/images/personagens/Papel.png" alt="" class="personagemP1">
             </div>
+            <div class="personagemContainerP2">
+                <div class="seta" id="setaazul"><img src="/assets/images/SetaAzul.png" class="piscando"></div>
+                <img src="assets/images/personagens/Papel.png" alt="" class="personagemP2">
+            </div>
+
         </section>
-        
-        <section class="left-platform"></section>
-        <section class="right-platform"></section>
-        <div class="personagemContainerP1">
-            <div class="seta" id="setavermelha"><img src="/assets/images/SetaVermelha.png" class="piscando"></div>
-            <img src="assets/images/personagens/Papel.png" alt="" class="personagemP1">
-        </div>
-        <div class="personagemContainerP2">
-            <div class="seta" id="setaazul"><img src="/assets/images/SetaAzul.png" class="piscando"></div>
-            <img src="assets/images/personagens/Papel.png" alt="" class="personagemP2">
-        </div>
-        
-    </section>
+        <section class="arena-chao"></section>
 
     
-    <section class="arena-chao"></section>
-    
-    
-    <script src="js/jogo.js" type="module"></script>
-</body>
+
+
+    </body>
+</div>
+<script src="js/jogo.js" type="module"></script>
+
 </html>
