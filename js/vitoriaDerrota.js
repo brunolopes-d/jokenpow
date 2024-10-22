@@ -12,12 +12,14 @@ const vitoriaDiv = document.querySelector(".vencedor");
 const vitoriaSound = new Audio('./assets/audios/vitoria.mp3');
 vitoriaSound.play()
 
+// Verifica se o ganhador é diferente do perdedor, caso seja, ele vai apenas dizer o nome dos personagens
 if (ganhador !== perdedor) {
     if (ganhador === "Papel") {
         vitoriaDiv.innerHTML = `O ${ganhador} saiu vitorioso.`;
     } else if (ganhador === "Pedra" || ganhador === "Tesoura") {
         vitoriaDiv.innerHTML = `A ${ganhador} saiu vitoriosa.`;
     }
+// Caso não seja, ele vai dizer quem ganhou baseado na numeração dos jogadores
 } else {
     if (playerGanhador === 'p1') {
         vitoriaDiv.innerHTML = `O jogador 1 venceu.`

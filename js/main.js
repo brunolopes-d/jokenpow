@@ -23,10 +23,12 @@ botaoIniciar.addEventListener('click', () => {
     render(estado)
 })
 
+// Botão de ativar a música
 botaoMusicaAtivar.addEventListener('click', () => {
     audio.play()
 })
 
+// Botão de desativar a música
 botaoMusicaDesativar.addEventListener('click', () => {
     audio.pause()
 })
@@ -83,14 +85,15 @@ const selecionarPersonagem = (jogador, direcao) => {
 }
 
 const teclasApertadas = (evento, estado) => {
-    switch (evento.key) {
+    const key = evento.key.toLowerCase(); // Converte a tecla pressionada para minúscula
+    switch (key) {
         case "w":
             return { ...estado, jogador1: selecionarPersonagem(estado.jogador1, -1) };
         case "s":
             return { ...estado, jogador1: selecionarPersonagem(estado.jogador1, 1) };
-        case "ArrowUp":
+        case "i":
             return { ...estado, jogador2: selecionarPersonagem(estado.jogador2, -1) };
-        case "ArrowDown":
+        case "k":
             return { ...estado, jogador2: selecionarPersonagem(estado.jogador2, 1) };
         default:
             return estado; // Retorna o estado original caso nenhuma tecla relevante seja pressionada
@@ -142,7 +145,8 @@ const render = (estado) => {
             if (quadradoPedra) quadradoPedra.classList.add('bordaVermelha')
             if (quadradoPapel) quadradoPapel.classList.remove("bordaVermelha")
             if (quadradoTesoura) quadradoTesoura.classList.remove('bordaVermelha')
-
+            
+            // Antes de realizar o map, limpa os outros, para evitar uma acúmulo de estrelas
             resistenciaP1.innerHTML = ''
             velocidadeP1.innerHTML = ''
             letalidadeP1.innerHTML = ''
@@ -262,10 +266,12 @@ const render = (estado) => {
             if (quadradoTesoura) quadradoTesoura.classList.remove("boardaAzul")
             if (quadradoPapel) quadradoPapel.classList.remove('boardaAzul')
 
+            // Antes de realizar o map, limpa os outros, para evitar uma acúmulo de estrelas
             resistenciaP2.innerHTML = ''
             velocidadeP2.innerHTML = ''
             letalidadeP2.innerHTML = ''
 
+            // Faz um map nos valores dos atributos para decidir quantas estrelas vão ser renderizadas, a mesma coisa se repete para os outros personagens
             pedraAtributos.map((valor) => {
                 if (valor === 0) {
                     const novaEstrela = document.createElement('img');
@@ -365,7 +371,7 @@ const render = (estado) => {
     }
 
     // Checa se os dois jogadores estão no mesmo personagem, se estiverem no mesmo
-    // personagem, ele troca a cor do quadrado pra roxo (azul + vermelho)
+    // personagem, ele aplica uma borda dupla no elemento
 
     if (estado.jogador1.indiceAtual === estado.jogador2.indiceAtual) {
         if (personagemJogador1 === "Pedra") {
@@ -420,10 +426,6 @@ const renderizarArena = () => {
     // Redireciona para a página arena.html, com os personagens escolhidos no formato de query params.
     const personagemJogador1 = estado.jogador1.personagens[estado.jogador1.indiceAtual]
     const personagemJogador2 = estado.jogador2.personagens[estado.jogador2.indiceAtual]
-    
-    localStorage.setItem('personagemJogador1', personagemJogador1);
-    localStorage.setItem('personagemJogador2', personagemJogador2);
-    
     window.location.href = `arena.html?personagem1=${personagemJogador1}&personagem2=${personagemJogador2}`;
 }
 

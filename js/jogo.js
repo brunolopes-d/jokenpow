@@ -23,12 +23,15 @@ nomeP2.innerText = p2;
 imgPersonagem1.style.backgroundImage = `url('assets/images/personagens/${p1}.png')`;
 imgPersonagem2.style.backgroundImage = `url('assets/images/personagens/${p2}.png')`;
 
+// Definição do chão da arena
 const chao = document.querySelector('.chao')
 
+// Definição do som dos ataques
 const somAtaquePedra = new Audio('./assets/audios/PedraAtaque.mp3');
 const somAtaquePapel = new Audio('./assets/audios/PapelAtaque.wav');
 const somAtaqueTesoura = new Audio('./assets/audios/TesouraAtaque.wav');
 
+// Definição da música da arena, começando mais baixa e após o final do contador 
 const musica = new Audio('./assets/music/Under Fire.mp3');
 musica.play()
 musica.volume = 0.2;
@@ -225,7 +228,7 @@ const atualizaPos = (estado, jogador) => {
         }
     }
 
-    return novoEstado;
+    return novoEstado; // retorna apenas o novoEstado caso não tenha ocorrido colisão
 };
 
 // Função responsável por verificar se dois personagens colidiram, tanto
@@ -448,6 +451,8 @@ const atualizarBarraHP = () => {
     // Atualiza o width da barra de vida do jogador 1 e 2 com o percentual calculado
     barraDeVidaP1.style.width = `${percentualVidaP1}%`;
     barraDeVidaP2.style.width = `${percentualVidaP2}%`;
+
+    // A cada vez que a barra for atualizada, ele vai chamar a função verificarVitoria para ver se alguém venceu o duelo
     verificarVitoria()
 }
 
@@ -456,38 +461,34 @@ const atualizarBarraHP = () => {
 // acionado, alterando o estado, de maneiras diferentes dependendo da tecla apertada, variando o valor
 // do vx da função mover por exemplo, e o personagem que se movimenta 
 const handleKeyDown =  (e) => {
-    // Comandos para o player 1
+    const key = e.key.toLowerCase(); // Converte a tecla pressionada para minúscula
 
-    if (e.key === "a") {
+    // Comandos para o player 1
+    if (key === "a") {
         estado = mover(estado, "player1", "esquerda")
     }
 
-    if (e.key === "d") {
+    if (key === "d") {
         estado = mover(estado, 'player1', "direita")
     }
 
-    if (e.key === "w") {
+    if (key === "w") {
         estado = pular(estado, 'player1')
     }
 
-    // Teclas de ataque do player 1 
-
     // Comandos para o player 2
 
-    if (e.key === "ArrowLeft") {
+    if (key === "j") {
         estado = mover(estado, "player2", "esquerda")
     }
 
-    if (e.key === "ArrowRight") {
+    if (key === "l") {
         estado = mover(estado, "player2", "direita")
     }
 
-    if (e.key === "ArrowUp") {
+    if (key === "i") {
         estado = pular(estado, "player2")
-    }
-
-    // Teclas de ataque do player 2
-    
+    }    
 }
 
 // Aqui, verificamos se o jogador soltou a tecla, para então definirmos sua velocidade para 0, caso contrário,
@@ -497,47 +498,57 @@ const handleKeyDown =  (e) => {
 // Detalhe: Isso acaba causando um pequeno atraso ao mudar de posições, mas é o único jeito que encontramos
 // usando apenas o estado
 const handleKeyUp =  (e) => {
-    if (e.key === "a" || e.key === "d") {
+    const key = e.key.toLowerCase(); // Converte a tecla pressionada para minúscula
+
+    if (key === "a" || key === "d") {
         estado = {...estado, player1: {
             ...estado.player1,
             vx: 0
         }}
     }
 
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+    if (key === "j" || key === "l") {
         estado = {...estado, player2: {
             ...estado.player2,
             vx: 0
         }}
     }
 
- // As ações de aque só vão ser realizadas após ser detectado um keyUp,além disso os personagens
- // só podem atacar casoo tenham uma vida > 0(antes mesmo morto os personagens batiam mesmo mortos)
+ // As ações de ataque só vão ser realizadas após ser detectado um keyUp,além disso os personagens
+ // só podem atacar caso tenham uma vida > 0(antes mesmo morto os personagens batiam mesmo mortos)
 
-     if (e.key === "" && estado.player1.vida > 0) {
+ // Verifica também se o jogador tem vida para realizar o ataque, isso foi feito para evitar que mesmo morto ele consiga continuar atacando
+     if (key === "c" && estado.player1.vida > 0) {
         estado = atacar(estado, "player1");
     }
-    if (e.key === "0" && estado.player2.vida > 0) {
+    if (key === "n" && estado.player2.vida > 0) {
         estado = atacar(estado, "player2");
     }
 };
 
+
+// Funçãor responsável por verificar a vitória de algum dos jogadores
 const verificarVitoria = () => {
+    // Selecionando as barras de vida
     const barraDeVidaP1 = document.querySelector(".player1-health")
     const barraDeVidaP2 = document.querySelector(".player2-health")
 
+    // Se a barra de vida do jogador 1 chegar a 0%, visto as ações da função atualizarBarraHP, ele vai adicionar a class css morto, 
+    // que vai realizar uma animação do personagem morrendo, e depois de 7 segundos, vai redirecionar ele para tela de vitória
     if (barraDeVidaP1.style.width === `0%`) {
+        htmlPersonagemP1.classList.add('morto')
         setInterval(() => {
             window.location.href = `vitoria.html?ganhador=${p2}&perdedor=${p1}&jogador1=${p1}&jogador2=${p2}&pg=p2`;
         }, 7000)
-        htmlPersonagemP1.classList.add('morto')
     }
 
+    // Se a barra de vida do jogador 2 chegar a 0%, visto as ações da função atualizarBarraHP, ele vai adicionar a class css morto, 
+    // que vai realizar uma animação do personagem morrendo, e depois de 7 segundos, vai redirecionar ele para tela de vitória
     if (barraDeVidaP2.style.width === `0%`) {
+        htmlPersonagemP2.classList.add('morto')
         setInterval(() => {
             window.location.href = `vitoria.html?ganhador=${p1}&perdedor=${p2}&jogador1=${p1}&jogador2=${p2}&pg=p1`;
         }, 7000)
-        htmlPersonagemP2.classList.add('morto')
     }
 }
 
