@@ -33,6 +33,7 @@ https://www.quora.com/Is-functional-programming-suitable-for-game-development
 https://prog21.dadgum.com/23.html
 https://hendrikdcomp.github.io/pf/conteudo/estudocaso/ec_snake.html
 
+Sistema de movimentação foi baseado em: https://chris-granger.com/2012/02/26/connecting-to-your-creation/
 
 Jogo desenvolvido por:
 
